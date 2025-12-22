@@ -1,0 +1,237 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-1200 -1200 2400 2400" preserveAspectRatio="xMidYMid meet">
+	<title>worm</title>
+
+	<use href="../[library]/grid.svg#grid" x="0" y="0"/>
+
+	<script href="../[library]/maths.js"></script>
+
+	<script>
+		<![CDATA[
+		document.addEventListener('DOMContentLoaded', setup);
+
+		const page = {
+			width	: 2400,
+			height	: 2400,
+			xMin	: -1200,
+			xMax	: +1200,
+			yMin	: -1200,
+			yMax	: +1200,
+			wormGroup : undefined,
+		};
+
+		const circleDivisions = 12;
+		const degreeUnit = 360/circleDivisions;
+		const radius = 50;
+
+		var farm = [];
+		let worms = 7;
+
+		let intervalId;
+
+
+		function setup() {
+
+			wormFarm = document.getElementById('worm-farm');
+			document.getElementById('link-startStop').addEventListener('click', ()=> { event.preventDefault(); animationStartStop(); });	// preventDefault required otherwise shadow dom bleeds a getElementById warning
+			document.getElementById('link-forward').addEventListener('click', ()=> { event.preventDefault(); animationForward(); });
+
+			for (i=0; i < worms; i++)
+			{
+				farm[i] = new Worm(`worm-${i}`, 20);
+			}
+
+			console.log(farm)
+
+			//animationStart();
+		}
+
+
+		function animationStartStop() {
+
+			if (intervalId) {
+				clearInterval(intervalId);
+				intervalId = undefined;
+			}
+			else {
+				intervalId = setInterval(
+					()=> { moveWorms() },
+					100
+				);
+			}
+		}/* animationStartStop */
+
+		function animationForward() {
+			moveWorms();
+		}/* animationForward */
+
+
+		function moveWorms() {
+			farm.forEach(
+				(thisWorm) =>
+				{
+					//console.log(thisWorm);
+					thisWorm.move();
+				}
+			);
+		}
+
+
+		class Worm {
+			id;
+			length;
+			x = Maths.getRandomInt(page.xMin, page.xMax);
+			y = Maths.getRandomInt(page.yMin, page.yMax);;
+			direction;	// degrees
+			wormBody;
+
+			constructor(id, length) {
+				this.id = id;
+				this.length = length;
+				this.direction = Maths.getRandomInt(0,circleDivisions) * degreeUnit;
+
+				/* wormFarm.innerHTML += `
+					<g id="${this.id}" class="worm">
+						<circle cx="${this.x}" cy="${this.y}"/>
+					</g>
+				`; */
+
+				this.wormBody = document.createElementNS('http://www.w3.org/2000/svg','g');
+				this.wormBody.setAttribute('id',this.id);
+				this.wormBody.setAttribute('class','worm');
+				wormFarm.appendChild(this.wormBody);
+
+				//this.wormBody = document.getElementById(id);
+
+				const c = document.createElementNS('http://www.w3.org/2000/svg','circle');
+				c.setAttribute('cx', this.x);
+				c.setAttribute('cy', this.y);
+				this.wormBody.appendChild(c);
+
+				//console.log(this);
+			}
+
+
+			move() {
+				// generate a random movement factor (-1,0,+1)
+				// generate the new coordinate
+				// wrap as necessary
+				// add the new head
+				// delete the tail (if needed)
+				const directionChange = Maths.getRandomIntInclusive(-1,1);
+				this.direction += directionChange * degreeUnit;
+				this.x += Math.cos(Maths.degreesToRadians(this.direction)) * radius;
+				this.y += Math.sin(Maths.degreesToRadians(this.direction)) * radius;
+
+				//console.log(this);
+
+				this.x = wrapX(this.x);
+				this.y = wrapY(this.y);
+
+				//console.log(this);
+
+
+
+				/*this.wormBody.innerHTML += `
+					<circle cx="${this.x}" cy="${this.y}"/>
+				`;*/
+				// data-direction="${this.direction}"
+
+				//console.log(`${this.id} body`, this.wormBody.innerHTML);
+
+
+				//const c = document.createElement('circle');
+				const c = document.createElementNS('http://www.w3.org/2000/svg','circle');
+				c.setAttribute('cx', this.x);
+				c.setAttribute('cy', this.y);
+				this.wormBody.appendChild(c);
+
+				if (this.wormBody.childElementCount > this.length)
+				{
+					this.wormBody.firstElementChild.remove();
+				}
+
+			}/* move */
+
+		}/* Worm */
+
+
+		function wrapX(x) {
+			if (x < page.xMin ) x += page.width;
+			if (x > page.xMax ) x -= page.width;
+			return x;
+		}
+
+		function wrapY(y) {
+			if (y < page.yMin ) y += page.height;
+			if (y > page.yMax ) y -= page.height;
+			return y;
+		}
+
+
+
+		function draw(event) {
+			//console.log(event);
+			toTop(event.target);
+			//toBottom(event.target);
+		}
+
+		function toTop(element) {
+			const parentElement = element.parentElement;
+			const childElement = parentElement.removeChild(element);
+			parentElement.appendChild(childElement);
+		}
+
+
+		function toBottom(element) {
+			const parentElement = element.parentElement;
+			const childElement = parentElement.removeChild(element);
+			parentElement.insertBefore(childElement, parentElement.children[0]);
+		}
+
+
+		// ]]>
+	</script>
+
+	<style>
+		<![CDATA[
+
+		.worm-farm {
+			filter: drop-shadow(0px 40px 20px #222a);		/* in FF this filter gets quite CPU expensive with large numbers of worms */
+		}
+
+		.worm {
+			circle {
+				r: 50px;
+				stroke: pink;
+				stroke-width: 5px;
+				fill: darksalmon;
+			}
+		}
+
+		.controls a {
+			font-size:100px;
+			text-anchor: middle;
+			fill: royalblue;
+			&:hover {
+				text-decoration: underline;
+			}
+		}
+		]]>
+	</style>
+
+
+
+	<g class="controls">
+		<text x="0" y="-42%">
+			<a href="#" id="link-startStop">start/stop ⏯ </a>
+			<a href="#" id="link-forward">forward ⯈ </a>
+		</text>
+	</g>
+
+
+	<g id="worm-farm" class="worm-farm">
+
+	</g>
+
+
+</svg>
