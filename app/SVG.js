@@ -28,8 +28,10 @@ SVG.Rectangle = class {
 	}
 
 	get xMin() { return this.x; }
+	get xMid() { return this.x + this.width/2; }
 	get xMax() { return this.x + this.width; }
 	get yMin() { return this.y; }
+	get yMid() { return this.y + this.height/2; }
 	get yMax() { return this.y + this.height; }
 }/* SVG.Rectangle */
 
@@ -106,11 +108,11 @@ export class CartesianGrid {
 		let x = this.rectangle.x - (this.rectangle.x % spacing);
 		let y = this.rectangle.y - (this.rectangle.y % spacing);
 
-		for (x; x <= this.rectangle.xEnd; x += spacing){
-			xLines += `<line x1="${x}" y1="${-this.rectangle.y}" x2="${x}" y2="${-this.rectangle.yEnd}"><title>x: ${x}</title></line>`;
+		for (x; x <= this.rectangle.xMax; x += spacing){
+			xLines += `<line x1="${x}" y1="${-this.rectangle.y}" x2="${x}" y2="${-this.rectangle.yMax}"><title>x: ${x}</title></line>`;
 		}
-		for (y; y <= this.rectangle.yEnd; y += spacing){
-			yLines += `<line x1="${this.rectangle.x}" y1="${-y}" x2="${this.rectangle.xEnd}" y2="${-y}"><title>y: ${y}</title></line>`;
+		for (y; y <= this.rectangle.yMax; y += spacing){
+			yLines += `<line x1="${this.rectangle.x}" y1="${-y}" x2="${this.rectangle.xMax}" y2="${-y}"><title>y: ${y}</title></line>`;
 		}
 
 		result = `
@@ -132,10 +134,10 @@ export class CartesianGrid {
 
 		const adjust = -5;
 
-		for (x; x <= this.rectangle.xEnd; x += spacing){
+		for (x; x <= this.rectangle.xMax; x += spacing){
 			xLabels += (x !== 0) ? `<text x="${x}" y="${adjust}"><title>x: ${x}</title>${x}</text>` : '';
 		}
-		for (y; y <= this.rectangle.yEnd; y += spacing){
+		for (y; y <= this.rectangle.yMax; y += spacing){
 			yLabels += (y !== 0) ? `<text x="${adjust}" y="${-y}"><title>y: ${y}</title>${y}</text>` : '';	/* note negative y in here - needs to be made space-aware  */
 		}
 
