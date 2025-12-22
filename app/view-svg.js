@@ -25,6 +25,18 @@ const precision = {
 	report : 6
 };
 
+
+const page = {
+	width	: 4800,
+	height	: 4800,
+	xMin	: -1200,
+	xMax	: +1200,
+	yMin	: -1200,
+	yMax	: +1200,
+	wormGroup : undefined,
+};
+
+
 class SVGView {
 
 
@@ -195,6 +207,21 @@ class SVGView {
 		this.updatePageTransform();
 
 	}/* updatePage */
+
+
+	wrapX(x) {
+		if (x < page.xMin ) x += page.width;
+		if (x > page.xMax ) x -= page.width;
+		return x;
+	}
+
+	wrapY(y) {
+		if (y < page.yMin ) y += page.height;
+		if (y > page.yMax ) y -= page.height;
+		return y;
+	}
+
+
 
 }/* SVGView */
 
