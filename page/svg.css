@@ -1,0 +1,194 @@
+/* svg
+*/
+
+svg {
+	font-family: serif;
+}
+
+.svg-element {
+	width: 100vw;
+	height: 100vh;
+}
+
+svg:focus-within {
+	outline: 1px dotted var(--accent);
+	outline-offset: -1px;
+	/* filter: drop-shadow(0px 0px 2px var(--accent)); */
+	/* transition: 1s; */
+}
+
+.grid {
+	--colour-cartesian: var(--teal);
+	--colour-polar: var(--pink);
+	fill:none;
+
+	stroke-width: 1px;
+
+	.cartesian-grid {
+		stroke: var(--colour-cartesian);
+		.axis  { stroke-width: 5px; }
+		.major { stroke-width: 2px; }
+		.minor { stroke-width: 1px; }
+		.label { fill: var(--colour-cartesian); }
+		.origin { r: 10px; stroke-width: 3px; }
+
+		.axis line {
+			marker-start:url(#axisMarker-cartesian);
+			marker-end:url(#axisMarker-cartesian);
+		}
+	}
+
+
+
+	.label {
+		stroke: none;
+		font-size: 25px;
+		dominant-baseline: ideographic;
+		font-family: monospace;
+	}
+
+	.cartesian-grid .label {
+		text-anchor: end;
+		.x {
+			writing-mode: vertical-lr;
+		}
+	}
+
+
+
+}/* .grid */
+
+
+
+
+
+.light {
+	.use-point {
+		fill: var(--fadedred);
+		fill-opacity: 30%;
+		stroke: var(--fadedred);
+		stroke-opacity: 30%;
+	}
+}
+.dark {
+	.use-point {
+		fill: var(--fadedred);
+		fill-opacity: 30%;
+		stroke: var(--fadedred);
+		stroke-opacity: 30%;
+	}
+}
+
+
+
+
+.drawing {
+	--draw-colour: #f00;
+	stroke: var(--draw-colour);
+	fill: var(--draw-colour);
+	fill-opacity: 50%;
+
+	stroke-width: var(--drawing-stroke-width);
+	stroke-linecap: round;
+	stroke-linejoin: miter;
+	paint-order: stroke;
+
+	.marker {
+		display: none;
+	}
+
+	&.show-marker .marker{
+		display:inline;
+	}
+
+	text {
+		text-anchor: middle;
+		dominant-baseline: middle;
+		font-style:normal;
+		stroke:none;
+		font-size: calc(10px * var(--drawing-stroke-width));
+		fill-opacity:100%;
+	}
+
+}
+
+#def-marker {
+	--foo: 5;
+	--scale-min: 1;
+
+	--scale: max(var(--drawing-stroke-width) /5, var(--scale-min) );
+	--scale-temp: calc(var(--drawing-stroke-width) /5 );
+
+	stroke-width: 0px;
+
+	scale: var(--scale);
+
+	/* d: path('m0,-30 L10,10 L-10 10 z'); */
+
+	&:hover {
+		scale: calc(var(--scale) * 1.8);
+	}
+}
+
+
+
+
+
+
+
+.barry {
+
+	--body-fill: var(--character-body);
+	--body-stroke: var(--character-outline);
+	--head-stroke: var(--body-stroke);
+	stroke: none;
+
+	.body {
+		fill: var(--body-fill);
+		r: 40px;
+		cx:0px;
+		cy:0px;
+		stroke: var(--character-outline);
+		stroke-width: 4px;
+	}
+	.feet>circle { r: 12px; }
+
+
+	.feet { fill: var(--character-outline); }
+	.head {
+		fill: var(--character-outline);
+		stroke: var(--head-stroke);
+	}
+	.eyes {
+		fill: var(--eye-colour);;
+	}
+
+	.head { r: 20px; cx:0px; cy:-40px; }
+	.el   { r: 5px; cx:-10px; cy:-44px; }
+	.er   { r: 5px; cx:+10px; cy:-44px; }
+
+
+	filter: drop-shadow(0px 0px 30px #ff07);
+
+}
+
+
+
+.character-hover {
+	transform-box: content-box;
+	transform-origin: 50% 60%;		/* ~60% to account for head non-symmetry */
+	&:hover {
+		scale:150%;
+	}
+}
+
+
+
+.barry {
+	--head-fill: var(--body-stroke);
+	--eye-colour: yellow;
+}
+
+
+
+

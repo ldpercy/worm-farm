@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<title>Worm Farm v0.0.0 by ldpercy</title>
+	<meta charset="utf-8">
+	<meta name="color-scheme" content="dark light">
+	<meta name="description" content="Worm Farm v0.0.0 by ldpercy - SVG, JavaScript, HTML, CSS">
+	<link rel="icon" href="./page/worm-icon.svg"/>
+	<link rel="stylesheet" href="./page/html.css"/>
+	<link rel="stylesheet" href="./page/svg.css"/>
+
+	<script>
+		const protocol = new URL(window.location).protocol;
+
+		if (protocol === 'file:') {
+			alert("You are using `file:` protocol - modules won't work");
+		}
+	</script>
+
+	<script type="module" src="./app/wormfarmApp.js"></script>
+</head>
+<body class="dark">
+
+	<div class="control-group control-left">
+		<form id="form-application" tabindex="0">
+			<h1>Worm Farm</h1>
+
+
+			<br/>
+
+			<h2>Position</h2>
+			<output id="character-info" class="infoBox"></output>
+
+			<br/>
+			<button type="button" popovertarget="info-popover"><strong>🛈 Worm Farm help</strong></button>
+
+		</form>
+	</div><!-- control-left -->
+
+	<div class="control-group control-right">
+		<form id="form-page" tabindex="0">
+			<h2>Page</h2>
+
+			<label for="input-centerCharacter" title="Center the character on the page">
+				<input type="checkbox" name="centerCharacter" id="input-centerCharacter" checked>
+				center
+			</label>
+			<label for="input-rotatePage" title="Rotate the page with the character's direction">
+				<input type="checkbox" name="rotatePage" id="input-rotatePage">
+				rotate
+			</label>
+
+			<label class="scheme" title="Colour scheme">
+				<label title="Light scheme">
+					<input type="radio" name="colourScheme" value="light" checked>
+					light
+				</label>
+				<label title="Dark scheme">
+					<input type="radio" name="colourScheme" value="dark">
+					dark
+				</label>
+
+			</label>
+			<label for="input-zoom" class="zoom" title="Page zoom">
+				<input type="range" name="zoom" id="input-zoom" value="1" min="-1" max="3" list="datalist-zoom"/>
+				<datalist id="datalist-zoom">
+					<option value="-1">-1</option>
+					<option value="0">0</option>
+					<option value="1">+1</option>
+					<option value="2">+2</option>
+					<option value="3">+3</option>
+				</datalist>
+				zoom
+			</label>
+
+			<h3>Grid</h3>
+			<details>
+				<summary>
+					<label for="input-showCartesian" title="Show the cartesian grid">
+						<input type="checkbox" name="showCartesian" id="input-showCartesian" checked>
+						cartesian
+					</label>
+				</summary>
+				<input name="cartesianOpacity" id="input-cartesianOpacity" type="range" min="0.1" max="1" step="0.1" value="1" title="Cartesian grid opacity">
+			</details>
+
+
+			<h3>Mouse</h3>
+			<label title="No action">
+				<input type="radio" name="mouse-click" value="na" checked>
+				no action
+			</label>
+			<label title="Point information">
+				<input type="radio" name="mouse-click" value="info">
+				point info
+				<button id="button-clearPoint" type="button" title="Clear point">clear</button>
+			</label>
+			<label title="Move the character">
+				<input type="radio" name="mouse-click" value="move">
+				move
+			</label>
+			<label title="Move and draw">
+				<input type="radio" name="mouse-click" value="draw">
+				draw
+			</label>
+		</form><!-- page -->
+
+
+
+	</div><!-- control-right -->
+
+
+	<!-- svg-element
+	-->
+	<svg id="svg-element" class="svg-element" viewBox="-1200 -1200 2400 2400" preserveAspectRatio="xMidYMid meet" tabindex="0">
+
+		<defs>
+			<path id="def-marker"  d="m0,-30 L10,10 L-10 10 z"/>  <!-- class="marker" -->
+			<circle id="def-point" class="def-point"/>
+
+			<g class="grid">
+				<marker id="axisMarker-cartesian" class="axis" markerWidth="100" markerHeight="100" refX="0" refY="0" viewBox="-50 -50 100 100" orient="auto-start-reverse" markerUnits="userSpaceOnUse">
+					<path d="m-20,-20 L50,0 L-20,20 "/>
+				</marker>
+			</g>
+
+		</defs>
+
+		<g id="group-page" class="page">
+			<g id="group-grid" class="grid">
+				<g id="group-cartesian">
+					<g id="group-cartesianGrid" class="cartesian-grid"></g>
+					<g id="group-cartesianPoint" class="cartesian-point"></g>
+				</g>
+			</g>
+
+			<g id="group-drawing" class="drawing show-marker">
+				<!-- drawing elements go in here -->
+			</g>
+
+
+			<g id="character-icon">
+				<g class="character barry character-hover">
+					<title id="character-title"></title>
+					<g class="feet">
+						<circle class="fl"/>
+						<circle class="fr"/>
+						<circle class="bl"/>
+						<circle class="br"/>
+					</g>
+					<circle class="body"/>
+					<circle class="head"/>
+					<g class="eyes">
+						<path d="m -3,-38 a 6,6 0 1 0 -10,0 z"/>
+						<path d="m +3,-38 a 6,6 0 1 1 +10,0 z"/>
+					</g>
+				</g>
+			</g>
+
+
+
+
+
+		</g><!-- page -->
+	</svg>
+
+
+	<dialog popover id="info-popover" closedby="any">
+		<h1>
+			<a href="https://github.com/ldpercy/worm-farm/">Worm Farm</a>
+			<a href="https://github.com/ldpercy/worm-farm/pull/??">v0.0.0</a>
+			by <a href="https://github.com/ldpercy/">ldpercy</a>
+		</h1>
+
+		<h2>Worm farm commands</h2>
+
+		<h2>Keyboard shortcuts</h2>
+		<ul>
+			<li><kbd>d</kbd>				Do commands</li>
+			<li><kbd>c</kbd>				Clear the drawing</li>
+			<li><kbd>o</kbd>				Return character to origin</li>
+
+			<li><kbd>! (shift 1)</kbd>		Show command tab 1</li>
+			<li><kbd>@ (shift 2)</kbd>		Show command tab 2</li>
+			<li><kbd># (shift 3)</kbd>		Show command tab 3</li>
+
+			<li><kbd>T</kbd>				Toggle character visibility</li>
+			<li><kbd>C</kbd>				Toggle character centering</li>
+			<li><kbd>R</kbd>				Toggle page rotation</li>
+
+			<li><kbd>+ or z</kbd>			Zoom in</li>
+			<li><kbd>- or Z</kbd>			Zoom out</li>
+
+			<li><kbd>?</kbd>				Show this dialog</li>
+		</ul>
+
+
+	</dialog>
+
+
+</body>
+</html>

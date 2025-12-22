@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet" viewBox="-55 -55 110 110">
+
+	<style>
+
+
+		.worm {
+
+			--worm-body: darksalmon;
+			--worm-outline: pink;
+
+			circle {
+				r: 50px;
+				cx: 0px;
+				cy: 0px;
+				stroke: var(--worm-outline);
+				stroke-width: 5px;
+				fill: var(--worm-body);
+			}
+			.eyes { fill: black; stroke:none;}
+
+			.body { r: 40px; cx:0px; cy:0px; }
+		}
+
+	</style>
+
+	<g id="worm-icon" class="worm">
+		<circle class="body"/>
+		<circle class="head"/>
+		<g class="eyes">
+			<!-- <circle class="el"/>
+			<circle class="er"/> -->
+
+			<path d="m -3,-3 a 6,11 0 1 0 -22,0 z"/>
+			<path d="m +3,-3 a 6,11 0 1 1 +22,0 z"/>
+		</g>
+	</g>
+</svg>
