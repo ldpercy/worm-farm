@@ -43,7 +43,6 @@ class SVGView {
 	constructor() {
 		const svgElement = document.getElementById('svg-element');
 		element = HTMLApp.buildElementMap(svgElement, elementMap);
-
 		//console.log('svg element', element);
 	}
 
@@ -54,15 +53,6 @@ class SVGView {
 		document.getElementById('group-cartesianGrid').innerHTML = cartesianGrid.toString();
 	}
 
-
-
-	draw(string) {
-		element.drawing.innerHTML += string;
-	}
-
-	clearDrawing() {
-		element.drawing.innerHTML = '';
-	}
 
 
 	drawPointInfo(svgX, svgY) {
