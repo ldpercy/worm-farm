@@ -11,6 +11,7 @@ import { PlanarSpace } from "./PlanarSpace.js";
 import * as controller from './controller.js';
 import { svg } from './view-svg.js';
 import { ui } from './view-html-ui.js';
+import { wormFarm } from './WormFarm.js';
 
 
 class WormFarmApp extends HTMLApp {
@@ -20,6 +21,7 @@ class WormFarmApp extends HTMLApp {
 		https://github.com/ldpercy/worm-farm/pull/??
 	`.replace(/\n\t\t/g,'\n');
 
+	intervalId;
 
 	elementMap = {
 		applicationForm		: 'form-application',
@@ -110,6 +112,24 @@ class WormFarmApp extends HTMLApp {
 
 
 
+	animationStartStop() {
+
+		if (this.intervalId) {
+			clearInterval(this.intervalId);
+			this.intervalId = undefined;
+		}
+		else {
+			this.intervalId = setInterval(
+				()=> { wormFarm.moveWorms() },
+				100
+			);
+		}
+	}/* animationStartStop */
+
+
+	animationForward() {
+		wormFarm.moveWorms();
+	}/* animationForward */
 
 
 

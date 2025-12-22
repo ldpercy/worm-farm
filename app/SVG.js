@@ -27,8 +27,10 @@ SVG.Rectangle = class {
 		this.height = height;
 	}
 
-	get xEnd() { return this.x + this.width; }
-	get yEnd() { return this.y + this.height; }
+	get xMin() { return this.x; }
+	get xMax() { return this.x + this.width; }
+	get yMin() { return this.y; }
+	get yMax() { return this.y + this.height; }
 }/* SVG.Rectangle */
 
 

@@ -172,7 +172,7 @@ export class Character {
 		const result = {
 			x : position.location.x,
 			y : position.location.y,
-			direction : new this.space.Angle(position.direction.degrees),
+			direction : this.space.newAngle(position.direction.degrees),
 		};
 
 		return result;

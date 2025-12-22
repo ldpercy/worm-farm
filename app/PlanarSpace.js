@@ -138,11 +138,9 @@ export class PlanarSpace {
 		return new PlanarSpace.Position(name, this);
 	}/* newPosition */
 
-
-	Angle = class {
-		constructor() {
-			return new PlanarSpace.Angle(...arguments);
-		}
+	/** @returns { PlanarSpace.Angle } */
+	newAngle(degrees) {
+		return new PlanarSpace.Angle(degrees);
 	}/* Angle */
 
 
@@ -368,7 +366,7 @@ PlanarSpace.Position = class {
 		this.#name = name;
 		this.#space = space;
 		this.#location    = space.newPoint(`${name}.location`);
-		this.#direction   = new space.Angle();
+		this.#direction   = space.newAngle();
 	}
 
 	get x()			{ return this.#location.x; }

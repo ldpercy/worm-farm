@@ -209,18 +209,6 @@ class SVGView {
 	}/* updatePage */
 
 
-	wrapX(x) {
-		if (x < page.xMin ) x += page.width;
-		if (x > page.xMax ) x -= page.width;
-		return x;
-	}
-
-	wrapY(y) {
-		if (y < page.yMin ) y += page.height;
-		if (y > page.yMax ) y -= page.height;
-		return y;
-	}
-
 
 
 }/* SVGView */
