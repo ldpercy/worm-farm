@@ -132,44 +132,33 @@ svg:focus-within {
 
 
 
-
-
-
-
 .barry {
 
-	--body-fill: var(--character-body);
-	--body-stroke: var(--character-outline);
-	--head-stroke: var(--body-stroke);
-	stroke: none;
+	--barry-colour: #0a07;
+	--barry-outline: #0a0f;
 
 	.body {
-		fill: var(--body-fill);
-		r: 40px;
-		cx:0px;
-		cy:0px;
-		stroke: var(--character-outline);
-		stroke-width: 4px;
+		circle {
+			r: 40px;
+			fill: var(--barry-colour);
+			stroke: var(--barry-outline);
+			stroke-width: 5px;
+		}
+		.tl   { cx:-10px; cy:-10px; }
+		.tr   { cx:+10px; cy:-10px; }
+		.bl   { cx:-10px; cy:+10px; }
+		.br   { cx:+10px; cy:+10px; }
 	}
 	.feet>circle { r: 12px; }
 
 
-	.feet { fill: var(--character-outline); }
-	.head {
-		fill: var(--character-outline);
-		stroke: var(--head-stroke);
-	}
-	.eyes {
-		fill: var(--eye-colour);;
-	}
-
-	.head { r: 20px; cx:0px; cy:-40px; }
-	.el   { r: 5px; cx:-10px; cy:-44px; }
-	.er   { r: 5px; cx:+10px; cy:-44px; }
+	.eyes { fill: yellow; stroke:none;}
+}
 
 
+
+.character {
 	filter: drop-shadow(0px 0px 30px #ff07);
-
 }
 
 
@@ -185,8 +174,8 @@ svg:focus-within {
 
 
 .barry {
-	--head-fill: var(--body-stroke);
-	--eye-colour: yellow;
+
+
 }
 
 
