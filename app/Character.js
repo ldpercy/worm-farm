@@ -110,7 +110,7 @@ export class Character {
 
 
 	moveToXY(x,y) {
-		//this.character.moveToXY(x,y);
+		this.position.moveToXY(x,y);
 	}
 
 	moveToXYwithRotate(x,y) {

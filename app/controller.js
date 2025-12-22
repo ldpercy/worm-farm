@@ -23,7 +23,6 @@ import { svg } from "./view-svg.js";
 
 const keyFunctionMap = {
 	'd'	: doCommands,
-	'c'	: svg.clearDrawing,
 	'o'	: toOrigin,
 
 
@@ -80,10 +79,10 @@ export function svgClickListener(event) {
 	}
 	else if (mouseMode === 'move')
 	{
-		const cmd = `^xyr ${pagePoint.x}, ${-pagePoint.y}`;
-		doCommand(cmd);
+		wormfarmApp.character.moveToXY(pagePoint.x, -pagePoint.y);
 	}
-
+	svg.updateCharacter();
+	ui.updateCharacterInfo();
 }/* svgClickListener */
 
 
