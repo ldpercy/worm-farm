@@ -14,22 +14,24 @@ const elementMap = {
 
 export class WormFarm {
 	space;
-	wormCount;
+	dimensions;
 	creature = [];
 
 	constructor(
 		space,
-		wormCount = 7,
 	) {
 
 		this.space = space;
+		this.dimensions = space.dimensions;
 		element = HTMLApp.buildElementMap(document, elementMap);
+	}// constructor
 
-		for (let i=0; i < this.wormCount; i++)
+
+	populate(number) {
+		for (let i=0; i < number; i++)
 		{
-			this.addCreature();
+			this.addCreature(i);
 		}
-
 	}
 
 
@@ -40,18 +42,20 @@ export class WormFarm {
 			`worm-${id}`,
 			20
 		);
+		//console.log(worm);
+		this.creature.push(worm);
 
-		this.creature.push(new Worm());
 	}
 
 
 
 	moveCreatures() {
+		//console.debug('wormfarm.moveCreatures', this.creature);
 		this.creature.forEach(
-			(creature) =>
+			(thisCreature) =>
 			{
-				//console.log(thisWorm);
-				creature.move();
+				//console.log(thisCreature);
+				thisCreature.move();
 			}
 		);
 	}
@@ -69,26 +73,33 @@ export class Worm {
 	radius;
 	circleDivisions;
 	degreeUnit;
-	x = Maths.getRandomInt(wormfarmApp.space.dimensions.xMin, wormfarmApp.space.dimensions.xMax);
-	y = Maths.getRandomInt(wormfarmApp.space.dimensions.yMin, wormfarmApp.space.dimensions.yMax);;
+
 	direction;	// degrees
 	wormBody;
-
+	x;
+	y;
 
 	constructor(
-		wormFarm,
+		wormfarm,
 		id,
 		length,
 		radius = 50,
 		circleDivisions = 12,
 	) {
+		//console.log('Worm args', arguments);
+
+		this.wormfarm = wormfarm;
 		this.id = id;
 		this.length = length;
+		this.radius = radius;
 		this.circleDivisions = circleDivisions;
 		this.degreeUnit = 360/circleDivisions;
 
 		this.direction = wormfarmApp.space.newAngle();
 		this.direction.degrees = Maths.getRandomInt(0,circleDivisions) * this.degreeUnit;
+
+		this.x = Maths.getRandomInt(wormfarm.dimensions.xMin, wormfarm.dimensions.xMax);
+		this.y = Maths.getRandomInt(wormfarm.dimensions.yMin, wormfarm.dimensions.yMax);
 
 
 		this.wormBody = document.createElementNS('http://www.w3.org/2000/svg','g');
@@ -96,7 +107,6 @@ export class Worm {
 		this.wormBody.setAttribute('class','worm');
 		element.creature.appendChild(this.wormBody);
 
-		//this.wormBody = document.getElementById(id);
 
 		const c = document.createElementNS('http://www.w3.org/2000/svg','circle');
 		c.setAttribute('cx', this.x.toString());

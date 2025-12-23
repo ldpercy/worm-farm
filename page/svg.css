@@ -59,7 +59,18 @@ svg:focus-within {
 }/* .grid */
 
 
+.worm-farm {
+	filter: drop-shadow(0px 40px 20px #222a);		/* in FF this filter gets quite CPU expensive with large numbers of worms */
+}
 
+.worm {
+	circle {
+		r: 50px;
+		stroke: pink;
+		stroke-width: 5px;
+		fill: darksalmon;
+	}
+}
 
 
 .light {

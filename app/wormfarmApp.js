@@ -112,9 +112,10 @@ class WormFarmApp extends HTMLApp {
 
 		this.element.svg.setAttribute('viewBox', this.viewBox.toStringPadded(100));
 
-		this.space = new PlanarSpace('wormfarm-space');
+		this.space = new PlanarSpace('wormfarm-space', this.dimensions);
 		this.character = new Character('Barry', 'character-barry', this.space, 6);
-		this.wormfarm = new WormFarm();
+		this.wormfarm = new WormFarm(this.space);
+		this.wormfarm.populate(3);
 
 		svg.updateSpace();
 		svg.updateCharacter();
