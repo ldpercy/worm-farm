@@ -1,42 +1,39 @@
+import { HTMLApp } from "./library/HTMLApp.js";
 import * as Maths from "./library/Maths.js";
 import { wormfarmApp } from "./wormfarmApp.js";
 
 
-import { PlanarSpace } from "./library/PlanarSpace.js";
 
 
+let element;
 const elementMap = {
-	page			: 'group-page',
-	cartesianGroup  : 'group-cartesian',
-	cartesianGrid	: 'group-cartesianGrid',
-
-	drawing			: 'group-drawing',
-	characterIcon	: 'character-icon',
-	characterTitle	: 'character-title',
+	wormfarm		: 'group-wormfarm',
+	creature 		: 'group-creature',
 };
 
 
-class WormFarm {
-	farm = [];
-	wormCount;
+export class WormFarm {
 	space;
+	wormCount;
+	creature = [];
 
 	constructor(
-		wormCount = 7
+		space,
+		wormCount = 7,
 	) {
+
+		this.space = space;
+		element = HTMLApp.buildElementMap(document, elementMap);
 
 		for (let i=0; i < this.wormCount; i++)
 		{
-			this.addWorm();
+			this.addCreature();
 		}
-
-
-		this.space = new PlanarSpace('wormfarm-space');
 
 	}
 
 
-	addWorm(id) {
+	addCreature(id) {
 
 		const worm = new Worm(
 			this,
@@ -44,17 +41,17 @@ class WormFarm {
 			20
 		);
 
-		this.farm.push(new Worm());
+		this.creature.push(new Worm());
 	}
 
 
 
-	moveWorms() {
-		this.farm.forEach(
-			(thisWorm) =>
+	moveCreatures() {
+		this.creature.forEach(
+			(creature) =>
 			{
 				//console.log(thisWorm);
-				thisWorm.move();
+				creature.move();
 			}
 		);
 	}
@@ -65,15 +62,15 @@ class WormFarm {
 
 
 
-class Worm {
+export class Worm {
 	wormFarm;
 	id;
 	length;
 	radius;
 	circleDivisions;
 	degreeUnit;
-	x = Maths.getRandomInt(wormfarmApp.page.xMin, wormfarmApp.page.xMax);
-	y = Maths.getRandomInt(wormfarmApp.page.yMin, wormfarmApp.page.yMax);;
+	x = Maths.getRandomInt(wormfarmApp.space.dimensions.xMin, wormfarmApp.space.dimensions.xMax);
+	y = Maths.getRandomInt(wormfarmApp.space.dimensions.yMin, wormfarmApp.space.dimensions.yMax);;
 	direction;	// degrees
 	wormBody;
 
@@ -97,7 +94,7 @@ class Worm {
 		this.wormBody = document.createElementNS('http://www.w3.org/2000/svg','g');
 		this.wormBody.setAttribute('id',this.id);
 		this.wormBody.setAttribute('class','worm');
-		wormFarm.appendChild(this.wormBody);
+		element.creature.appendChild(this.wormBody);
 
 		//this.wormBody = document.getElementById(id);
 
@@ -153,18 +150,18 @@ class Worm {
 
 
 	wrapX(x) {
-		if (x < wormfarmApp.page.xMin ) x += wormfarmApp.page.width;
-		if (x > wormfarmApp.page.xMax ) x -= wormfarmApp.page.width;
+		if (x < wormfarmApp.space.dimensions.xMin ) x += wormfarmApp.space.dimensions.width;
+		if (x > wormfarmApp.space.dimensions.xMax ) x -= wormfarmApp.space.dimensions.width;
 		return x;
 	}
 
 	wrapY(y) {
-		if (y < wormfarmApp.page.yMin ) y += wormfarmApp.page.height;
-		if (y > wormfarmApp.page.yMax ) y -= wormfarmApp.page.height;
+		if (y < wormfarmApp.space.dimensions.yMin ) y += wormfarmApp.space.dimensions.height;
+		if (y > wormfarmApp.space.dimensions.yMax ) y -= wormfarmApp.space.dimensions.height;
 		return y;
 	}
 
 }/* Worm */
 
 
-export const wormFarm = new WormFarm();
+

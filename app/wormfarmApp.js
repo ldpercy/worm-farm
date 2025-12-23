@@ -11,7 +11,7 @@ import { PlanarSpace } from "./library/PlanarSpace.js";
 import * as controller from './controller.js';
 import { svg } from './view-svg.js';
 import { ui } from './view-html-ui.js';
-import { wormFarm } from './view-wormFarm.js';
+import { WormFarm } from './view-wormFarm.js';
 
 
 class WormFarmApp extends HTMLApp {
@@ -25,22 +25,32 @@ class WormFarmApp extends HTMLApp {
 
 	elementMap = {
 		applicationForm		: 'form-application',
-		pageForm			: 'form-page',
+		spaceForm			: 'form-space',
 		svg					: 'svg-element',
-		page				: 'group-page',
+		space				: 'group-space',
 		drawing				: 'group-drawing',
 	};
 
 	eventListeners = [
+		{
+			query: '#button-startStop',
+			type: 'click',
+			listener: this.animationStartStop,
+		},
+		{
+			query: '#button-forward',
+			type: 'click',
+			listener: this.animationForward,
+		},
 		{
 			query: '#button-origin',
 			type: 'click',
 			listener: controller.toOrigin
 		},
 		{
-			query: '#form-page',
+			query: '#form-space',
 			type: 'change',
-			listener: controller.updatePage
+			listener: controller.updateSpace
 		},
 		{
 			element: document,
@@ -76,30 +86,10 @@ class WormFarmApp extends HTMLApp {
 	documentDOMContentLoaded() {
 		super.documentDOMContentLoaded();
 
-
-		this.page = new SVG.Rectangle(-2400, -2400, 4800, 4800);
-		//this.page = new SVG.Rectangle(0, 0, 2100, 2970);		// A4 page
-		//const pageViewBox = new SVG.Rectangle(0, -2970, 2100, 2970);
-		this.viewBox = new SVG.ViewBox(this.page);
-
-		this.element.svg.setAttribute('viewBox', this.viewBox.toStringPadded(100));
-
-		this.space = new PlanarSpace('wormfarm-space');
-		this.character = new Character('Barry', 'character-barry', this.space, 6);
-
-
-		//this.viewBox = new SVG.viewBox().fromString('-1200 -1200 2400 2400');
-
 		const firstLoad = !localStorage.appSettings;
 
 		this.loadSettings();
 
-
-		svg.updatePage();
-		svg.updateCharacter();
-
-		svg.drawGrid();
-		ui.updateCharacterInfo();
 
 		localStorage.setItem('documentDOMContentLoaded', new Date().toISOString());
 		sessionStorage.setItem('documentDOMContentLoaded', new Date().toISOString());
@@ -107,12 +97,38 @@ class WormFarmApp extends HTMLApp {
 		// if (firstLoad) {
 		// 	console.log('first load')
 		// }
+
+		this.setup();
+
 	}/* documentDOMContentLoaded */
+
+
+
+	setup() {
+
+		this.dimensions = new SVG.Rectangle(-2400, -2400, 4800, 4800);
+
+		this.viewBox = new SVG.ViewBox(this.dimensions);
+
+		this.element.svg.setAttribute('viewBox', this.viewBox.toStringPadded(100));
+
+		this.space = new PlanarSpace('wormfarm-space');
+		this.character = new Character('Barry', 'character-barry', this.space, 6);
+		this.wormfarm = new WormFarm();
+
+		svg.updateSpace();
+		svg.updateCharacter();
+
+		svg.drawGrid();
+		ui.updateCharacterInfo();
+	}
 
 
 
 
 	animationStartStop() {
+
+		console.debug('animationStartStop', this.intervalId);
 
 		if (this.intervalId) {
 			clearInterval(this.intervalId);
@@ -120,7 +136,7 @@ class WormFarmApp extends HTMLApp {
 		}
 		else {
 			this.intervalId = setInterval(
-				()=> { wormFarm.moveWorms() },
+				()=> { this.wormfarm.moveCreatures() },
 				100
 			);
 		}
@@ -128,7 +144,7 @@ class WormFarmApp extends HTMLApp {
 
 
 	animationForward() {
-		wormFarm.moveWorms();
+		this.wormfarm.moveCreatures();
 	}/* animationForward */
 
 
@@ -161,7 +177,7 @@ class WormFarmApp extends HTMLApp {
 
 		const appSettings = {
 			application	: this.getFormData(this.element.applicationForm),
-			page		: this.getFormData(this.element.pageForm),
+			space		: this.getFormData(this.element.spaceForm),
 		};
 
 		//console.log(appSettings);
@@ -179,7 +195,7 @@ class WormFarmApp extends HTMLApp {
 
 			const appSettings = JSON.parse(localStorage.appSettings);
 			this.populateForm(this.element.applicationFormForm, appSettings.application);
-			this.populateForm(this.element.pageForm, appSettings.page);
+			this.populateForm(this.element.spaceForm, appSettings.space);
 		}
 		else {
 			// first load

@@ -9,23 +9,23 @@ export class PlanarSpace {
 
 	static origin = {x:0, y:0};
 	#name;
+	#dimensions;
 
 	// JavaScript angle adjustments - see wiki/coordinates
 	#jsAngleAxisAdjust;
 	#jsAngleDirectionAdjust;
 
-	// space dimensions - tbd
-	#size;
+
 
 
 	constructor(
 			name = 'Initial PlanarSpace name',
+			dimensions,
 			polarAxis = 'y',
 			polarDirection = 'clockwise',
-			size,
 		) {
 		this.#name = name;
-
+		this.#dimensions = dimensions;
 
 		if (polarAxis === 'y')	{	this.#jsAngleAxisAdjust = -Math.PI/2;	}
 		else					{	this.#jsAngleAxisAdjust = 0;			}
@@ -33,13 +33,14 @@ export class PlanarSpace {
 		if (polarDirection === 'clockwise')	{	this.#jsAngleDirectionAdjust = -1;	}
 		else								{	this.#jsAngleDirectionAdjust = +1;	}
 
-		this.#size = size;
+
 
 	}/* constructor */
 
 
 	get name() { return this.#name; }
 	get origin() { return PlanarSpace.origin; }
+	get dimensions() { return this.#dimensions; }
 
 
 

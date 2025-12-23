@@ -9,7 +9,7 @@ import { wormfarmApp } from "./wormfarmApp.js";
 let element;
 const elementMap = {
 	applicationForm		: 'form-application',
-	pageForm		: 'form-page',
+	spaceForm		: 'form-space',
 	characterInfo	: 'character-info',
 	infoPopover		: 'info-popover',
 };
@@ -34,40 +34,40 @@ class HTMLUserInterface {
 
 	/** @returns {boolean} */
 	get centerCharacter() {
-		return element.pageForm.centerCharacter.checked;
+		return element.spaceForm.centerCharacter.checked;
 	}
 
 	/** @returns {boolean} */
-	get rotatePage() {
-		return element.pageForm.rotatePage.checked;
+	get rotateSpace() {
+		return element.spaceForm.rotateSpace.checked;
 	}
 
 	/** @returns {string} */
 	get colourScheme() {
-		return element.pageForm.colourScheme.value;
+		return element.spaceForm.colourScheme.value;
 	}
 
 	/** @returns {number} */
 	get zoom() {
-		return element.pageForm.zoom.value;
+		return element.spaceForm.zoom.value;
 	}
 
 	/** @returns {boolean} */
 	get showCartesian() {
-		return element.pageForm.showCartesian.checked;
+		return element.spaceForm.showCartesian.checked;
 	}
 
 
 	/** @returns {number} */
 	get cartesianOpacity() {
-		return element.pageForm.cartesianOpacity.value;
+		return element.spaceForm.cartesianOpacity.value;
 	}
 
 
 
 	/** @returns {string} */
 	get mouseMode() {
-		return element.pageForm['mouse-click'].value;
+		return element.spaceForm['mouse-click'].value;
 	}
 
 
@@ -79,18 +79,18 @@ class HTMLUserInterface {
 
 	/** @param {number} zoomLevel */
 	set zoom(zoomLevel) {
-		element.pageForm.zoom.value = zoomLevel;
+		element.spaceForm.zoom.value = zoomLevel;
 	}
 
 
 	/** @param {boolean} center */
 	set centerCharacter(center) {
-		element.pageForm.centerCharacter.checked = center;
+		element.spaceForm.centerCharacter.checked = center;
 	}
 
 	/** @param {boolean} rotate */
-	set rotatePage(rotate) {
-		element.pageForm.rotatePage.checked = rotate;
+	set rotateSpace(rotate) {
+		element.spaceForm.rotateSpace.checked = rotate;
 	}
 
 
@@ -113,7 +113,7 @@ class HTMLUserInterface {
 
 	getScale() {
 
-		const zoomPower = Number.parseInt(element.pageForm.zoom.value);
+		const zoomPower = Number.parseInt(element.spaceForm.zoom.value);
 
 		const scale = 2 ** zoomPower;
 

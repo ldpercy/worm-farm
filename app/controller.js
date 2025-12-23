@@ -57,29 +57,26 @@ export function svgClickListener(event) {
 	//console.debug('svgClickListener', event);
 	const domPoint = new DOMPoint(event.clientX, event.clientY);
 
-	const pageElement = this.element.svg.getElementById('group-page');
+	const spaceElement = this.element.svg.getElementById('group-space');
 
-	// Get point in page SVG space
-	const pagePoint = domPoint.matrixTransform(pageElement.getScreenCTM().inverse());
-	//console.debug('pagePoint', pagePoint);
+	// Get point in SVG space coordinates
+	const spacePoint = domPoint.matrixTransform(spaceElement.getScreenCTM().inverse());
+	//console.debug('spacePoint', spacePoint);
 
-	// /this.drawPoint(pagePoint.x, pagePoint.y);	// adding this line seems to cancel subsequent events - do I need to re-propagate the event or something?
+	// /this.drawPoint(spacePoint.x, spacePoint.y);	// adding this line seems to cancel subsequent events - do I need to re-propagate the event or something?
 
-	//const cmd = `xyr ${pagePoint.x}, ${-pagePoint.y}`;
-	//console.debug('svgClickListener', cmd);
-	//this.doCommand(cmd);
 	const mouseMode = ui.mouseMode;
 
 	if (mouseMode === 'info') {
-		svg.drawPointInfo(pagePoint.x, pagePoint.y);
+		svg.drawPointInfo(spacePoint.x, spacePoint.y);
 	}
 	else if (mouseMode === 'draw') {
-		const cmd = `xyr ${pagePoint.x}, ${-pagePoint.y}`;
+		const cmd = `xyr ${spacePoint.x}, ${-spacePoint.y}`;
 		doCommand(cmd);
 	}
 	else if (mouseMode === 'move')
 	{
-		wormfarmApp.character.moveToXY(pagePoint.x, -pagePoint.y);
+		wormfarmApp.character.moveToXY(spacePoint.x, -spacePoint.y);
 	}
 	svg.updateCharacter();
 	ui.updateCharacterInfo();
@@ -96,8 +93,8 @@ export function svgClickListener(event) {
 //	handlers
 //
 
-export function updatePage() {
-	svg.updatePage();
+export function updateSpace() {
+	svg.updateSpace();
 }
 
 export function toOrigin() {
@@ -126,12 +123,12 @@ function doCommand(cmdString) {
 
 function toggleCenter() {
 	ui.centerCharacter = !ui.centerCharacter;
-	svg.updatePageTransform();
+	svg.updateSpaceTransform();
 }
 
 function toggleRotate() {
-	ui.rotatePage = !ui.rotatePage;
-	svg.updatePageTransform();
+	ui.rotateSpace = !ui.rotateSpace;
+	svg.updateSpaceTransform();
 }
 
 
@@ -139,11 +136,11 @@ function toggleRotate() {
 function zoomIn() {
 	//console.log('zoomIn');
 	ui.zoom++;
-	svg.updatePageTransform();
+	svg.updateSpaceTransform();
 }
 
 function zoomOut() {
 	//console.log('zoomOut');
 	ui.zoom--;
-	svg.updatePageTransform();
+	svg.updateSpaceTransform();
 }

@@ -11,7 +11,7 @@ import { ui } from './view-html-ui.js';
 
 let element = {};
 const elementMap = {
-	page			: 'group-page',
+	space			: 'group-space',
 	cartesianGroup  : 'group-cartesian',
 	cartesianGrid	: 'group-cartesianGrid',
 
@@ -26,16 +26,6 @@ const precision = {
 };
 
 
-const page = {
-	width	: 4800,
-	height	: 4800,
-	xMin	: -1200,
-	xMax	: +1200,
-	yMin	: -1200,
-	yMax	: +1200,
-	wormGroup : undefined,
-};
-
 
 class SVGView {
 
@@ -49,7 +39,7 @@ class SVGView {
 
 
 	drawGrid() {
-		const cartesianGrid = new SVG.CartesianGrid(wormfarmApp.space, wormfarmApp.page);
+		const cartesianGrid = new SVG.CartesianGrid(wormfarmApp.space, wormfarmApp.dimensions);
 		document.getElementById('group-cartesianGrid').innerHTML = cartesianGrid.toString();
 	}
 
@@ -145,18 +135,18 @@ class SVGView {
 			`translate(${wormfarmApp.character.svgX},${wormfarmApp.character.svgY}) rotate(${wormfarmApp.character.position.degrees})`
 		);
 
-		this.updatePageTransform();
+		this.updateSpaceTransform();
 		element.characterTitle.innerHTML = wormfarmApp.character.report;
 	}/* updateCharacter */
 
 
 
-	updatePageTransform() {
+	updateSpaceTransform() {
 
 
 		const rotate = wormfarmApp.character.position.degrees;
 
-		const rotateTransform    = (ui.rotatePage)   ? `rotate(${-rotate},0,0)` : 'rotate(0,0,0)';
+		const rotateTransform    = (ui.rotateSpace)   ? `rotate(${-rotate},0,0)` : 'rotate(0,0,0)';
 		const translateTransform = (ui.centerCharacter) ? `translate(${-wormfarmApp.character.svgX},${-wormfarmApp.character.svgY})` : 'translate(0,0)';
 
 		const scaleTransform = `scale(${ui.getScale()})`;
@@ -165,14 +155,14 @@ class SVGView {
 
 		const transform = `${scaleTransform} ${rotateTransform} ${translateTransform} `;
 
-		element.page.setAttribute('transform', transform);
-	}/* updatePageTransform */
+		element.space.setAttribute('transform', transform);
+	}/* updateSpaceTransform */
 
 
 
 
 
-	updatePage() {
+	updateSpace() {
 
 		if (ui.showCartesian) {
 			element.cartesianGroup.style.display = '';
@@ -194,9 +184,9 @@ class SVGView {
 
 		element.cartesianGrid.style.setProperty('opacity', ui.cartesianOpacity);
 
-		this.updatePageTransform();
+		this.updateSpaceTransform();
 
-	}/* updatePage */
+	}/* updateSpace */
 
 
 

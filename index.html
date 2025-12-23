@@ -42,30 +42,30 @@
 	</div><!-- control-left -->
 
 	<div class="control-group control-right">
-		<form id="form-page" tabindex="0">
-			<h2>Page</h2>
+		<form id="form-space" tabindex="0">
+			<h2>Space</h2>
 
-			<label for="input-centerCharacter" title="Center the character on the page">
+			<label for="input-centerCharacter" title="Center the character in the space">
 				<input type="checkbox" name="centerCharacter" id="input-centerCharacter" checked>
 				center
 			</label>
-			<label for="input-rotatePage" title="Rotate the page with the character's direction">
-				<input type="checkbox" name="rotatePage" id="input-rotatePage">
+			<label for="input-rotateSpace" title="Rotate the space with the character's direction">
+				<input type="checkbox" name="rotateSpace" id="input-rotateSpace">
 				rotate
 			</label>
 
 			<label class="scheme" title="Colour scheme">
 				<label title="Light scheme">
 					<input type="radio" name="colourScheme" value="light" checked>
-					light
+					night
 				</label>
 				<label title="Dark scheme">
 					<input type="radio" name="colourScheme" value="dark">
-					dark
+					day
 				</label>
 
 			</label>
-			<label for="input-zoom" class="zoom" title="Page zoom">
+			<label for="input-zoom" class="zoom" title="Space zoom">
 				<input type="range" name="zoom" id="input-zoom" value="1" min="-1" max="3" list="datalist-zoom"/>
 				<datalist id="datalist-zoom">
 					<option value="-1">-1</option>
@@ -130,7 +130,8 @@
 
 		</defs>
 
-		<g id="group-page" class="page">
+		<g id="group-space">
+
 			<g id="group-grid" class="grid">
 				<g id="group-cartesian">
 					<g id="group-cartesianGrid" class="cartesian-grid"></g>
@@ -138,36 +139,36 @@
 				</g>
 			</g>
 
-			<g id="group-drawing" class="drawing show-marker">
-				<!-- drawing elements go in here -->
-			</g>
+			<g id="group-wormfarm" class="wormfarm">
+
+				<g id="group-creature" class="creature">
+					<!-- creatures go in here -->
+				</g>
 
 
-			<g id="character-icon">
-				<title id="character-title"></title>
-				<g id="character-barry" class="character barry character-hover">
-					<g class="body">
-						<circle class="tl"/>
-						<circle class="tr"/>
-						<circle class="bl"/>
-						<circle class="br"/>
-					</g>
-					<g class="eyes">
-						<!-- <circle class="el"/>
-						<circle class="er"/> -->
+				<g id="character-icon">
+					<title id="character-title"></title>
+					<g id="character-barry" class="character barry character-hover">
+						<g class="body">
+							<circle class="tl"/>
+							<circle class="tr"/>
+							<circle class="bl"/>
+							<circle class="br"/>
+						</g>
+						<g class="eyes">
+							<!-- <circle class="el"/>
+							<circle class="er"/> -->
 
-						<path d="m -3,-3 a 6,11 0 1 0 -22,0 z"/>
-						<path d="m +3,-3 a 6,11 0 1 1 +22,0 z"/>
+							<path d="m -3,-3 a 6,11 0 1 0 -22,0 z"/>
+							<path d="m +3,-3 a 6,11 0 1 1 +22,0 z"/>
+						</g>
 					</g>
 				</g>
-			</g>
 
+			</g><!-- wormfarm -->
+		</g><!-- group-space -->
 
-
-
-
-		</g><!-- page -->
-	</svg>
+	</svg><!-- svg -->
 
 
 	<dialog popover id="info-popover" closedby="any">
@@ -181,13 +182,7 @@
 
 		<h2>Keyboard shortcuts</h2>
 		<ul>
-			<li><kbd>d</kbd>				Do commands</li>
-			<li><kbd>c</kbd>				Clear the drawing</li>
 			<li><kbd>o</kbd>				Return character to origin</li>
-
-			<li><kbd>! (shift 1)</kbd>		Show command tab 1</li>
-			<li><kbd>@ (shift 2)</kbd>		Show command tab 2</li>
-			<li><kbd># (shift 3)</kbd>		Show command tab 3</li>
 
 			<li><kbd>T</kbd>				Toggle character visibility</li>
 			<li><kbd>C</kbd>				Toggle character centering</li>
