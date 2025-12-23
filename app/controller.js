@@ -24,7 +24,9 @@ import { svg } from "./view-svg.js";
 const keyFunctionMap = {
 	'd'	: doCommands,
 	'o'	: toOrigin,
-
+	's' : animationStartStop,
+	'f' : animationForward,
+	'w' : addCreature,
 
 	'C'	: toggleCenter,
 	'R'	: toggleRotate,
@@ -143,4 +145,32 @@ function zoomOut() {
 	//console.log('zoomOut');
 	ui.zoom--;
 	svg.updateSpaceTransform();
+}
+
+
+
+export function animationStartStop() {
+
+	//console.debug('animationStartStop', this.intervalId);
+
+	if (this.intervalId) {
+		clearInterval(this.intervalId);
+		this.intervalId = undefined;
+	}
+	else {
+		this.intervalId = setInterval(
+			()=> { wormfarmApp.wormfarm.moveCreatures() },
+			100
+		);
+	}
+}/* animationStartStop */
+
+
+export function animationForward() {
+	wormfarmApp.wormfarm.moveCreatures();
+}/* animationForward */
+
+
+export function addCreature() {
+	wormfarmApp.wormfarm.addCreature();
 }

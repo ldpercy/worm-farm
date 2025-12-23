@@ -30,16 +30,16 @@ export class WormFarm {
 	populate(number) {
 		for (let i=0; i < number; i++)
 		{
-			this.addCreature(i);
+			this.addCreature();
 		}
 	}
 
 
-	addCreature(id) {
+	addCreature() {
 
 		const worm = new Worm(
 			this,
-			`worm-${id}`,
+			`worm-${this.creature.length}`,
 			20
 		);
 		//console.log(worm);

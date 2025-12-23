@@ -70,6 +70,11 @@ svg:focus-within {
 		stroke-width: 5px;
 		fill: darksalmon;
 	}
+	/* .head {
+		el { d : "m -3,-3 a 6,11 0 1 0 -22,0 z" }
+		er { d : "m +3,-3 a 6,11 0 1 1 +22,0 z" }
+	} */
+
 }
 
 

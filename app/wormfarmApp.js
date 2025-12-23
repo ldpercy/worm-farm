@@ -21,8 +21,6 @@ class WormFarmApp extends HTMLApp {
 		https://github.com/ldpercy/worm-farm/pull/??
 	`.replace(/\n\t\t/g,'\n');
 
-	intervalId;
-
 	elementMap = {
 		applicationForm		: 'form-application',
 		spaceForm			: 'form-space',
@@ -35,12 +33,12 @@ class WormFarmApp extends HTMLApp {
 		{
 			query: '#button-startStop',
 			type: 'click',
-			listener: this.animationStartStop,
+			listener: controller.animationStartStop,
 		},
 		{
 			query: '#button-forward',
 			type: 'click',
-			listener: this.animationForward,
+			listener: controller.animationForward,
 		},
 		{
 			query: '#button-origin',
@@ -125,28 +123,6 @@ class WormFarmApp extends HTMLApp {
 	}
 
 
-
-
-	animationStartStop() {
-
-		console.debug('animationStartStop', this.intervalId);
-
-		if (this.intervalId) {
-			clearInterval(this.intervalId);
-			this.intervalId = undefined;
-		}
-		else {
-			this.intervalId = setInterval(
-				()=> { this.wormfarm.moveCreatures() },
-				100
-			);
-		}
-	}/* animationStartStop */
-
-
-	animationForward() {
-		this.wormfarm.moveCreatures();
-	}/* animationForward */
 
 
 
