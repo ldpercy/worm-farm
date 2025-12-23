@@ -1,8 +1,19 @@
-import * as Maths from "./Maths.js";
+import * as Maths from "./library/Maths.js";
 import { wormfarmApp } from "./wormfarmApp.js";
 
 
-import { PlanarSpace } from "./PlanarSpace.js";
+import { PlanarSpace } from "./library/PlanarSpace.js";
+
+
+const elementMap = {
+	page			: 'group-page',
+	cartesianGroup  : 'group-cartesian',
+	cartesianGrid	: 'group-cartesianGrid',
+
+	drawing			: 'group-drawing',
+	characterIcon	: 'character-icon',
+	characterTitle	: 'character-title',
+};
 
 
 class WormFarm {

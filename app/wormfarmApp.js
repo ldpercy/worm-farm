@@ -2,16 +2,16 @@
 //	wormfarmApp.js
 //
 
-import { HTMLApp } from "./HTMLApp.js";
+import { HTMLApp } from "./library/HTMLApp.js";
 import { Character } from "./Character.js";
 
-import { SVG } from "./SVG.js";
-import { PlanarSpace } from "./PlanarSpace.js";
+import { SVG } from "./library/SVG.js";
+import { PlanarSpace } from "./library/PlanarSpace.js";
 
 import * as controller from './controller.js';
 import { svg } from './view-svg.js';
 import { ui } from './view-html-ui.js';
-import { wormFarm } from './WormFarm.js';
+import { wormFarm } from './view-wormFarm.js';
 
 
 class WormFarmApp extends HTMLApp {

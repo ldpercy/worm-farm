@@ -2,7 +2,7 @@
 //	view html-ui
 //
 
-import { HTMLApp } from "./HTMLApp.js";
+import { HTMLApp } from "./library/HTMLApp.js";
 import { wormfarmApp } from "./wormfarmApp.js";
 
 
