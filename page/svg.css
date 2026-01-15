@@ -1,0 +1,174 @@
+/* svg
+*/
+
+svg {
+	font-family: serif;
+}
+
+.svg-element {
+	width: 100vw;
+	height: 100vh;
+}
+
+svg:focus-within {
+	outline: 1px dotted var(--accent);
+	outline-offset: -1px;
+	/* filter: drop-shadow(0px 0px 2px var(--accent)); */
+	/* transition: 1s; */
+}
+
+.grid {
+	--colour-cartesian: var(--teal);
+	--colour-polar: var(--pink);
+	fill:none;
+
+	stroke-width: 1px;
+
+	.cartesian-grid {
+		stroke: var(--colour-cartesian);
+		.axis  { stroke-width: 5px; }
+		.major { stroke-width: 2px; }
+		.minor { stroke-width: 1px; }
+		.label { fill: var(--colour-cartesian); }
+		.origin { r: 10px; stroke-width: 3px; }
+
+		.axis line {
+			marker-start:url(#axisMarker-cartesian);
+			marker-end:url(#axisMarker-cartesian);
+		}
+	}
+
+
+
+	.label {
+		stroke: none;
+		font-size: 25px;
+		dominant-baseline: ideographic;
+		font-family: monospace;
+	}
+
+	.cartesian-grid .label {
+		text-anchor: end;
+		.x {
+			writing-mode: vertical-lr;
+		}
+	}
+
+
+
+}/* .grid */
+
+
+.worm-farm {
+	filter: drop-shadow(0px 40px 20px #222a);		/* in FF this filter gets quite CPU expensive with large numbers of worms */
+}
+
+.worm {
+	circle {
+		r: 50px;
+		stroke: pink;
+		stroke-width: 5px;
+		fill: darksalmon;
+	}
+	/* .head {
+		el { d : "m -3,-3 a 6,11 0 1 0 -22,0 z" }
+		er { d : "m +3,-3 a 6,11 0 1 1 +22,0 z" }
+	} */
+
+}
+
+
+.light {
+	.use-point {
+		fill: var(--fadedred);
+		fill-opacity: 30%;
+		stroke: var(--fadedred);
+		stroke-opacity: 30%;
+	}
+}
+.dark {
+	.use-point {
+		fill: var(--fadedred);
+		fill-opacity: 30%;
+		stroke: var(--fadedred);
+		stroke-opacity: 30%;
+	}
+}
+
+
+
+
+.drawing {
+	--draw-colour: #f00;
+	stroke: var(--draw-colour);
+	fill: var(--draw-colour);
+	fill-opacity: 50%;
+
+	stroke-width: var(--drawing-stroke-width);
+	stroke-linecap: round;
+	stroke-linejoin: miter;
+	paint-order: stroke;
+
+	.marker {
+		display: none;
+	}
+
+	&.show-marker .marker{
+		display:inline;
+	}
+
+	text {
+		text-anchor: middle;
+		dominant-baseline: middle;
+		font-style:normal;
+		stroke:none;
+		font-size: calc(10px * var(--drawing-stroke-width));
+		fill-opacity:100%;
+	}
+
+}
+
+
+
+.barry {
+
+	--barry-colour: #0a07;
+	--barry-outline: #0a0f;
+
+	.body {
+		circle {
+			r: 40px;
+			fill: var(--barry-colour);
+			stroke: var(--barry-outline);
+			stroke-width: 5px;
+		}
+		.tl   { cx:-10px; cy:-10px; }
+		.tr   { cx:+10px; cy:-10px; }
+		.bl   { cx:-10px; cy:+10px; }
+		.br   { cx:+10px; cy:+10px; }
+	}
+	.feet>circle { r: 12px; }
+
+
+	.eyes { fill: yellow; stroke:none;}
+}
+
+
+
+.character {
+	filter: drop-shadow(0px 0px 30px #ff07);
+}
+
+
+
+.character-hover {
+	transform-box: content-box;
+	transform-origin: 50% 60%;		/* ~60% to account for head non-symmetry */
+	&:hover {
+		scale:150%;
+	}
+}
+
+
+
+

@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet" viewBox="-55 -55 110 110">
+
+	<style>
+
+
+		.barry {
+
+			--barry-colour: #0a07;
+			--barry-outline: #0a0f;
+
+			.body {
+				circle {
+					r: 40px;
+					fill: var(--barry-colour);
+					stroke: var(--barry-outline);
+					stroke-width: 5px;
+				}
+				.tl   { cx:-10px; cy:-10px; }
+				.tr   { cx:+10px; cy:-10px; }
+				.bl   { cx:-10px; cy:+10px; }
+				.br   { cx:+10px; cy:+10px; }
+			}
+
+			.eyes { fill: yellow; stroke:none;}
+		}
+
+	</style>
+
+	<g id="character-barry" class="barry">
+		<g class="body">
+			<circle class="tl"/>
+			<circle class="tr"/>
+			<circle class="bl"/>
+			<circle class="br"/>
+		</g>
+		<g class="eyes">
+			<!-- <circle class="el"/>
+			<circle class="er"/> -->
+
+			<path d="m -3,-3 a 6,11 0 1 0 -22,0 z"/>
+			<path d="m +3,-3 a 6,11 0 1 1 +22,0 z"/>
+		</g>
+	</g>
+</svg>
