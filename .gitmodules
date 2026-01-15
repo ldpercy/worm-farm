@@ -1,0 +1,4 @@
+[submodule "app/[html-common]"]
+	path = app/[html-common]
+	url = https://github.com/ldpercy/html-common
+	branch = main
