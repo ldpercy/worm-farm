@@ -2,7 +2,7 @@
 //	wormfarmApp.js
 //
 
-import { HTMLApp } from "./library/HTMLApp.js";
+import { HTMLApp } from "./[html-common]/module/HTMLApp.js";
 import { Character } from "./Character.js";
 
 import { SVG } from "./library/SVG.js";
@@ -16,10 +16,14 @@ import { WormFarm } from './view-wormFarm.js';
 
 class WormFarmApp extends HTMLApp {
 
-	info = `
-		Worm Farm v0.0.0 by ldpercy
+	appVersion = 'v0.⛴🗊';
+	appInfo = [`%c
+		Worm Farm ${this.appVersion} by ldpercy
 		https://github.com/ldpercy/worm-farm/pull/??
-	`.replace(/\n\t\t/g,'\n');
+		`.replace(/\n\t\t/g,'\n'),
+		'color:light-dark(darksalmon, lightsalmon);'
+	];
+
 
 	elementMap = {
 		applicationForm		: 'form-application',
