@@ -5,8 +5,8 @@
 import { HTMLApp } from "./[html-common]/module/HTMLApp.js";
 import { Character } from "./Character.js";
 
-import { SVG } from "./library/SVG.js";
-import { PlanarSpace } from "./library/PlanarSpace.js";
+import { SVG } from "./[html-common]/module/SVG.js";
+import { PlanarSpace } from "./[html-common]/module/PlanarSpace.js";
 
 import * as controller from './controller.js';
 import { svg } from './view-svg.js';
