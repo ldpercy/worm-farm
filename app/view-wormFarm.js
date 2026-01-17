@@ -1,7 +1,8 @@
 import { HTMLApp } from "./[html-common]/module/HTMLApp.js";
 import * as Maths from "./[html-common]/module/Maths.js";
 import { wormfarmApp } from "./wormfarmApp.js";
-
+import * as character from "./view-character.js";
+import { svg } from './view-svg.js'
 
 
 
@@ -9,6 +10,8 @@ let element;
 const elementMap = {
 	wormfarm		: 'group-wormfarm',
 	creature 		: 'group-creature',
+	characterIcon	: 'character-icon',
+	characterTitle	: 'character-title',
 };
 
 
@@ -25,6 +28,22 @@ export class WormFarm {
 		this.dimensions = space.dimensions;
 		element = HTMLApp.buildElementMap(document, elementMap);
 	}// constructor
+
+
+	addCharacter() {
+		element.characterIcon.innerHTML += character.getBarrySVG;
+	}
+
+	updateCharacter() {
+		element.characterIcon.setAttribute(
+			'transform',
+			`translate(${wormfarmApp.character.svgX},${wormfarmApp.character.svgY}) rotate(${wormfarmApp.character.position.degrees})`
+		);
+
+		svg.updateSpaceTransform();
+		element.characterTitle.innerHTML = wormfarmApp.character.report;
+	}/* updateCharacter */
+
 
 
 	populate(number) {

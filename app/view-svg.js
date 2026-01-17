@@ -14,10 +14,6 @@ const elementMap = {
 	space			: 'group-space',
 	cartesianGroup  : 'group-cartesian',
 	cartesianGrid	: 'group-cartesianGrid',
-
-	drawing			: 'group-drawing',
-	characterIcon	: 'character-icon',
-	characterTitle	: 'character-title',
 };
 
 
@@ -129,15 +125,7 @@ class SVGView {
 
 
 
-	updateCharacter() {
-		element.characterIcon.setAttribute(
-			'transform',
-			`translate(${wormfarmApp.character.svgX},${wormfarmApp.character.svgY}) rotate(${wormfarmApp.character.position.degrees})`
-		);
 
-		this.updateSpaceTransform();
-		element.characterTitle.innerHTML = wormfarmApp.character.report;
-	}/* updateCharacter */
 
 
 

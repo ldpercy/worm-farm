@@ -16,7 +16,7 @@ import { WormFarm } from './view-wormFarm.js';
 
 class WormFarmApp extends HTMLApp {
 
-	appVersion = 'v0.1.0';
+	appVersion = 'v0.⇶🏃‍➡️';
 	appInfo = [`%c
 		Worm Farm ${this.appVersion} by ldpercy
 		https://github.com/ldpercy/worm-farm/pull/??
@@ -117,10 +117,11 @@ class WormFarmApp extends HTMLApp {
 		this.space = new PlanarSpace('wormfarm-space', this.dimensions);
 		this.character = new Character('Barry', 'character-barry', this.space, 6);
 		this.wormfarm = new WormFarm(this.space);
+		this.wormfarm.addCharacter();
 		this.wormfarm.populate(3);
 
 		svg.updateSpace();
-		svg.updateCharacter();
+		this.wormfarm.updateCharacter();
 
 		svg.drawGrid();
 		ui.updateCharacterInfo();

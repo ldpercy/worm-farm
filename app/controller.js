@@ -9,6 +9,7 @@ import { svg } from "./view-svg.js";
 
 
 
+
 //
 //	event listeners
 //
@@ -72,15 +73,11 @@ export function svgClickListener(event) {
 	if (mouseMode === 'info') {
 		svg.drawPointInfo(spacePoint.x, spacePoint.y);
 	}
-	else if (mouseMode === 'draw') {
-		const cmd = `xyr ${spacePoint.x}, ${-spacePoint.y}`;
-		doCommand(cmd);
-	}
 	else if (mouseMode === 'move')
 	{
 		wormfarmApp.character.moveToXY(spacePoint.x, -spacePoint.y);
 	}
-	svg.updateCharacter();
+	wormfarmApp.wormfarm.updateCharacter();
 	ui.updateCharacterInfo();
 }/* svgClickListener */
 
@@ -102,7 +99,7 @@ export function updateSpace() {
 export function toOrigin() {
 	//console.log('toOrigin');
 	doCommand('^o');
-	svg.updateCharacter();
+	wormfarmApp.wormfarm.updateCharacter();
 	ui.updateCharacterInfo();
 }
 
@@ -110,13 +107,13 @@ export function toOrigin() {
 export function doCommands() {
 
 
-	svg.updateCharacter();
+	wormfarmApp.wormfarm.updateCharacter();
 	ui.updateCharacterInfo();
 }/* doCommands */
 
 
 function doCommand(cmdString) {
-	svg.updateCharacter();
+	wormfarmApp.wormfarm.updateCharacter();
 	ui.updateCharacterInfo();
 }
 
