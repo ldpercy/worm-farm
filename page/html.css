@@ -95,7 +95,8 @@ body.dark {
 
 
 
-h1:nth-child(1), h2:nth-child(1) { margin-top:0ex; }
+h1:first-child, h2:first-child { margin-top:0ex; }
+
 
 
 

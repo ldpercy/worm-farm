@@ -25,7 +25,7 @@ export class WormFarm {
 	) {
 
 		this.space = space;
-		this.dimensions = space.dimensions;
+		this.dimensions = space.size;
 		element = HTMLApp.buildElementMap(document, elementMap);
 	}// constructor
 
@@ -179,14 +179,14 @@ export class Worm {
 
 
 	wrapX(x) {
-		if (x < wormfarmApp.space.dimensions.xMin ) x += wormfarmApp.space.dimensions.width;
-		if (x > wormfarmApp.space.dimensions.xMax ) x -= wormfarmApp.space.dimensions.width;
+		if (x < wormfarmApp.space.size.xMin ) x += wormfarmApp.space.size.width;
+		if (x > wormfarmApp.space.size.xMax ) x -= wormfarmApp.space.size.width;
 		return x;
 	}
 
 	wrapY(y) {
-		if (y < wormfarmApp.space.dimensions.yMin ) y += wormfarmApp.space.dimensions.height;
-		if (y > wormfarmApp.space.dimensions.yMax ) y -= wormfarmApp.space.dimensions.height;
+		if (y < wormfarmApp.space.size.yMin ) y += wormfarmApp.space.size.height;
+		if (y > wormfarmApp.space.size.yMax ) y -= wormfarmApp.space.size.height;
 		return y;
 	}
 

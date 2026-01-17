@@ -6,7 +6,7 @@ import { HTMLApp } from "./[html-common]/module/HTMLApp.js";
 import { Character } from "./Character.js";
 
 import { SVG } from "./[html-common]/module/SVG.js";
-import { PlanarSpace } from "./[html-common]/module/PlanarSpace.js";
+import * as space from "./[html-common]/module/PlanarSpace.js";
 
 import * as controller from './controller.js';
 import { svg } from './view-svg.js';
@@ -108,13 +108,15 @@ class WormFarmApp extends HTMLApp {
 
 	setup() {
 
-		this.dimensions = new SVG.Rectangle(-2400, -2400, 4800, 4800);
+		this.size = new space.Rectangle(-2400, -2400, 4800, 4800);
 
-		this.viewBox = new SVG.ViewBox(this.dimensions);
+		this.space = new space.Space('wormfarm-space', this.size);
+
+		this.viewBox = new SVG.ViewBox(this.size);
 
 		this.element.svg.setAttribute('viewBox', this.viewBox.toStringPadded(100));
 
-		this.space = new PlanarSpace('wormfarm-space', this.dimensions);
+
 		this.character = new Character('Barry', 'character-barry', this.space, 6);
 		this.wormfarm = new WormFarm(this.space);
 		this.wormfarm.addCharacter();

@@ -35,17 +35,18 @@ class SVGView {
 
 
 	drawGrid() {
-		const cartesianGrid = new SVG.CartesianGrid(wormfarmApp.space, wormfarmApp.dimensions);
+		const cartesianGrid = new SVG.CartesianGrid(wormfarmApp.space, wormfarmApp.size);
 		document.getElementById('group-cartesianGrid').innerHTML = cartesianGrid.toString();
 	}
 
 
-
+	/*
 	drawPointInfo(svgX, svgY) {
 		const pointInfoSvg = this.pointInfo(svgX, -svgY);
 		document.getElementById('group-cartesianPoint').innerHTML = pointInfoSvg.cartesian;
 		document.getElementById('group-polarPoint').innerHTML = pointInfoSvg.polar;
 	}
+	*/
 
 
 	clearPoint() {
@@ -57,7 +58,7 @@ class SVGView {
 
 
 	/* pointInfo
-	*/
+	* /
 	pointInfo(x, y) {
 		const result = {
 			cartesian: '',
@@ -121,7 +122,7 @@ class SVGView {
 		`;
 
 		return result;
-	}/* pointInfo */
+	}/ * pointInfo */
 
 
 

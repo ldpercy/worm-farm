@@ -71,7 +71,7 @@ export function svgClickListener(event) {
 	const mouseMode = ui.mouseMode;
 
 	if (mouseMode === 'info') {
-		svg.drawPointInfo(spacePoint.x, spacePoint.y);
+		//svg.drawPointInfo(spacePoint.x, spacePoint.y);
 	}
 	else if (mouseMode === 'move')
 	{
