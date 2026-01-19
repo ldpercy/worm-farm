@@ -5,7 +5,7 @@
 import { Character } from "./Character.js";
 import { wormfarmApp } from "./wormfarmApp.js";
 import { ui } from './view-html-ui.js';
-import { svg } from "./view-svg.js";
+import { svgdoc } from "./view-svgdoc.js";
 
 
 
@@ -93,7 +93,7 @@ export function svgClickListener(event) {
 //
 
 export function updateSpace() {
-	svg.updateSpace();
+	svgdoc.updateSpace();
 }
 
 export function toOrigin() {
@@ -122,12 +122,12 @@ function doCommand(cmdString) {
 
 function toggleCenter() {
 	ui.centerCharacter = !ui.centerCharacter;
-	svg.updateSpaceTransform();
+	svgdoc.updateSpaceTransform();
 }
 
 function toggleRotate() {
 	ui.rotateSpace = !ui.rotateSpace;
-	svg.updateSpaceTransform();
+	svgdoc.updateSpaceTransform();
 }
 
 
@@ -135,13 +135,13 @@ function toggleRotate() {
 function zoomIn() {
 	//console.log('zoomIn');
 	ui.zoom++;
-	svg.updateSpaceTransform();
+	svgdoc.updateSpaceTransform();
 }
 
 function zoomOut() {
 	//console.log('zoomOut');
 	ui.zoom--;
-	svg.updateSpaceTransform();
+	svgdoc.updateSpaceTransform();
 }
 
 

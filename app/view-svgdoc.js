@@ -23,7 +23,7 @@ const precision = {
 
 
 
-class SVGView {
+class SVGDoc {
 
 
 	constructor() {
@@ -35,7 +35,7 @@ class SVGView {
 
 
 	drawGrid() {
-		const cartesianGrid = new SVG.CartesianGrid(wormfarmApp.space, wormfarmApp.size);
+		const cartesianGrid = new SVG.CartesianGrid(wormfarmApp.space, wormfarmApp.svgViewBox);
 		document.getElementById('group-cartesianGrid').innerHTML = cartesianGrid.toString();
 	}
 
@@ -180,7 +180,7 @@ class SVGView {
 
 
 
-}/* SVGView */
+}/* SVGDoc */
 
 
-export const svg = new SVGView();
+export const svgdoc = new SVGDoc();

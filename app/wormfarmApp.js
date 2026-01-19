@@ -5,11 +5,11 @@
 import { HTMLApp } from "./[html-common]/module/HTMLApp.js";
 import { Character } from "./Character.js";
 
-import { SVG } from "./[html-common]/module/SVG.js";
+import * as svg from "./[html-common]/module/SVG.js";
 import * as space from "./[html-common]/module/PlanarSpace.js";
 
 import * as controller from './controller.js';
-import { svg } from './view-svg.js';
+import { svgdoc } from './view-svgdoc.js';
 import { ui } from './view-html-ui.js';
 import { WormFarm } from './view-wormFarm.js';
 
@@ -77,7 +77,7 @@ class WormFarmApp extends HTMLApp {
 		{
 			query: '#button-clearPoint',
 			type: 'click',
-			listener: svg.clearPoint,
+			listener: svgdoc.clearPoint,
 		},
 
 	];
@@ -108,24 +108,28 @@ class WormFarmApp extends HTMLApp {
 
 	setup() {
 
-		this.size = new space.Rectangle(-2400, -2400, 4800, 4800);
+		this.svgViewBox = new svg.ViewBox(-2400, -2400, 4800, 4800);
+		this.element.svg.setAttribute('viewBox', this.svgViewBox.toStringPadded(100));
 
-		this.space = new space.Space('wormfarm-space', this.size);
+		this.wormfarmBox = new space.Box(-2400, -2400, 4800, 4800);
+		this.space = new space.Space(
+			'wormfarm-space',
+			{
+				shape : this.wormfarmBox,
+			}
+		);
+		//console.log(this.space);
 
-		this.viewBox = new SVG.ViewBox(this.size);
-
-		this.element.svg.setAttribute('viewBox', this.viewBox.toStringPadded(100));
-
+		this.wormfarm = new WormFarm(this.space, this.svgViewBox);
 
 		this.character = new Character('Barry', 'character-barry', this.space, 6);
-		this.wormfarm = new WormFarm(this.space);
 		this.wormfarm.addCharacter();
 		this.wormfarm.populate(3);
 
-		svg.updateSpace();
+		svgdoc.updateSpace();
 		this.wormfarm.updateCharacter();
 
-		svg.drawGrid();
+		svgdoc.drawGrid();
 		ui.updateCharacterInfo();
 	}
 
