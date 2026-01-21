@@ -16,8 +16,8 @@ html {
 	--purple: #b0b;
 	--fadedred: #f07;	/* point info */
 
-	--accent-light: #08c;
-	--accent-dark: #0cf;
+	--accent-light: darksalmon;
+	--accent-dark: lightsalmon;
 	--transition-duration: 0.5s;
 
 	--character-body: #0a07;
