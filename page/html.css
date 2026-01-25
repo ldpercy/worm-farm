@@ -44,7 +44,7 @@ html {
 	*/
 }
 
-body.light {
+html.colourScheme-light {
 	color-scheme: light;
 	--accent: var(--accent-light);
 	accent-color: var(--accent);
@@ -63,7 +63,7 @@ body.light {
 	}
 }
 
-body.dark {
+html.colourScheme-dark {
 	color-scheme: dark;
 	--accent: var(--accent-dark);
 	accent-color: var(--accent);
