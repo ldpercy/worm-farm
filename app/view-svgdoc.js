@@ -133,7 +133,7 @@ class SVGDoc {
 	updateSpaceTransform() {
 
 
-		const rotate = wormfarmApp.character.position.degrees;
+		const rotate = wormfarmApp.character.position.direction.degrees;
 
 		const rotateTransform    = (ui.rotateSpace)   ? `rotate(${-rotate},0,0)` : 'rotate(0,0,0)';
 		const translateTransform = (ui.centerCharacter) ? `translate(${-wormfarmApp.character.svgX},${-wormfarmApp.character.svgY})` : 'translate(0,0)';

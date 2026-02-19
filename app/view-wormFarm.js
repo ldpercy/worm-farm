@@ -37,7 +37,7 @@ export class WormFarm {
 	updateCharacter() {
 		element.characterIcon.setAttribute(
 			'transform',
-			`translate(${wormfarmApp.character.svgX},${wormfarmApp.character.svgY}) rotate(${wormfarmApp.character.position.degrees})`
+			`translate(${wormfarmApp.character.svgX},${wormfarmApp.character.svgY}) rotate(${wormfarmApp.character.position.direction.degrees})`
 		);
 
 		svgdoc.updateSpaceTransform();

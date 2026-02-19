@@ -113,10 +113,10 @@ class WormFarmApp extends HTMLApp {
 
 		this.wormfarmBox = new space.Box(-2400, -2400, 4800, 4800);
 		this.space = new space.Space(
-			'wormfarm-space',
 			{
 				shape : this.wormfarmBox,
-			}
+			},
+			'wormfarm-space'
 		);
 		//console.log(this.space);
 
