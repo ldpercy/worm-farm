@@ -83,7 +83,8 @@ export class WormFarm {
 
 
 
-
+/* Worm
+*/
 export class Worm {
 	/** @type {WormFarm} */ wormFarm;
 	id;
@@ -170,7 +171,7 @@ export class Worm {
 		//const c = document.createElement('circle');
 		const c = document.createElementNS('http://www.w3.org/2000/svg','circle');
 		c.setAttribute('cx', this.x.toString());
-		c.setAttribute('cy', this.y.toString());
+		c.setAttribute('cy', (-this.y).toString());
 		this.wormBody.appendChild(c);
 
 		if (this.wormBody.childElementCount > this.length)
