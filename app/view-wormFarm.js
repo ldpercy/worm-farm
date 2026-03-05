@@ -136,7 +136,7 @@ export class Worm {
 		c.setAttribute('cy', (-this.y).toString());
 		this.wormBody.appendChild(c);
 
-		console.log(this);
+		//console.log(this);
 	}
 
 
