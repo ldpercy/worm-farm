@@ -37,7 +37,7 @@ const keyFunctionMap = {
 	'Z'	: zoomOut,
 	'-'	: zoomOut,
 
-	'?'	: ui.togglePopover,
+	'?'	: ui.toggleAppInfoDialog,
 };
 
 
@@ -105,8 +105,6 @@ export function toOrigin() {
 
 
 export function doCommands() {
-
-
 	wormfarmApp.wormfarm.updateCharacter();
 	ui.updateCharacterInfo();
 }/* doCommands */

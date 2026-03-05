@@ -11,7 +11,7 @@ const elementMap = {
 	applicationForm		: 'form-application',
 	spaceForm		: 'form-space',
 	characterInfo	: 'character-info',
-	infoPopover		: 'info-popover',
+	appInfoDialog	: 'dialog-appInfo',
 };
 
 
@@ -100,8 +100,8 @@ class HTMLUserInterface {
 	//
 
 
-	togglePopover() {
-		element.infoPopover.togglePopover();
+	toggleAppInfoDialog() {
+		element.appInfoDialog.showModal();
 	}
 
 	updateCharacterInfo() {

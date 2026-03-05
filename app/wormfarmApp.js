@@ -79,7 +79,11 @@ class WormFarmApp extends HTMLApp {
 			type: 'click',
 			listener: svgdoc.clearPoint,
 		},
-
+		{
+			query: '#button-showAppInfo',
+			type: 'click',
+			listener: ui.toggleAppInfoDialog,
+		},
 	];
 
 
