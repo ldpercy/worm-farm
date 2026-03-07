@@ -16,7 +16,7 @@ import { WormFarm } from './view-wormFarm.js';
 
 class WormFarmApp extends HTMLApp {
 
-	appVersion = 'v0.⇶🏃‍➡️';
+	appVersion = 'v0.📽🖧';
 	appInfo = [`%c
 		Worm Farm ${this.appVersion} by ldpercy
 		https://github.com/ldpercy/worm-farm/pull/??
