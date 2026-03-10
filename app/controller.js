@@ -5,7 +5,8 @@
 import { Character } from "./Character.js";
 import { wormfarmApp } from "./wormfarmApp.js";
 import { ui } from './view-html-ui.js';
-import { svg } from "./view-svg.js";
+import { svgdoc } from "./view-svgdoc.js";
+
 
 
 
@@ -36,16 +37,18 @@ const keyFunctionMap = {
 	'Z'	: zoomOut,
 	'-'	: zoomOut,
 
-	'?'	: ui.togglePopover,
+	'?'	: ui.toggleAppInfoDialog,
 };
 
 
 export function documentKeyListener(event) {
 	//console.log('documentKeyListener', event);
 
-	if (keyFunctionMap[event.key]) {
-		event.preventDefault();
-		keyFunctionMap[event.key]();
+	if (!event.altKey && !event.ctrlKey && !event.metaKey) {
+		if (keyFunctionMap[event.key]) {
+			event.preventDefault();
+			keyFunctionMap[event.key]();
+		}
 	}
 
 }/* documentKeyListener */
@@ -70,17 +73,13 @@ export function svgClickListener(event) {
 	const mouseMode = ui.mouseMode;
 
 	if (mouseMode === 'info') {
-		svg.drawPointInfo(spacePoint.x, spacePoint.y);
-	}
-	else if (mouseMode === 'draw') {
-		const cmd = `xyr ${spacePoint.x}, ${-spacePoint.y}`;
-		doCommand(cmd);
+		//svg.drawPointInfo(spacePoint.x, spacePoint.y);
 	}
 	else if (mouseMode === 'move')
 	{
 		wormfarmApp.character.moveToXY(spacePoint.x, -spacePoint.y);
 	}
-	svg.updateCharacter();
+	wormfarmApp.wormfarm.updateCharacter();
 	ui.updateCharacterInfo();
 }/* svgClickListener */
 
@@ -96,27 +95,25 @@ export function svgClickListener(event) {
 //
 
 export function updateSpace() {
-	svg.updateSpace();
+	svgdoc.updateSpace();
 }
 
 export function toOrigin() {
 	//console.log('toOrigin');
 	doCommand('^o');
-	svg.updateCharacter();
+	wormfarmApp.wormfarm.updateCharacter();
 	ui.updateCharacterInfo();
 }
 
 
 export function doCommands() {
-
-
-	svg.updateCharacter();
+	wormfarmApp.wormfarm.updateCharacter();
 	ui.updateCharacterInfo();
 }/* doCommands */
 
 
 function doCommand(cmdString) {
-	svg.updateCharacter();
+	wormfarmApp.wormfarm.updateCharacter();
 	ui.updateCharacterInfo();
 }
 
@@ -125,12 +122,12 @@ function doCommand(cmdString) {
 
 function toggleCenter() {
 	ui.centerCharacter = !ui.centerCharacter;
-	svg.updateSpaceTransform();
+	svgdoc.updateSpaceTransform();
 }
 
 function toggleRotate() {
 	ui.rotateSpace = !ui.rotateSpace;
-	svg.updateSpaceTransform();
+	svgdoc.updateSpaceTransform();
 }
 
 
@@ -138,13 +135,13 @@ function toggleRotate() {
 function zoomIn() {
 	//console.log('zoomIn');
 	ui.zoom++;
-	svg.updateSpaceTransform();
+	svgdoc.updateSpaceTransform();
 }
 
 function zoomOut() {
 	//console.log('zoomOut');
 	ui.zoom--;
-	svg.updateSpaceTransform();
+	svgdoc.updateSpaceTransform();
 }
 
 

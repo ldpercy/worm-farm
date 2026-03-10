@@ -1,7 +1,8 @@
 import { HTMLApp } from "./[html-common]/module/HTMLApp.js";
 import * as Maths from "./[html-common]/module/Maths.js";
 import { wormfarmApp } from "./wormfarmApp.js";
-
+import * as character from "./view-character.js";
+import { svgdoc } from './view-svgdoc.js'
 
 
 
@@ -9,22 +10,40 @@ let element;
 const elementMap = {
 	wormfarm		: 'group-wormfarm',
 	creature 		: 'group-creature',
+	characterIcon	: 'character-icon',
+	characterTitle	: 'character-title',
 };
 
 
 export class WormFarm {
 	space;
-	dimensions;
+	svgBox;
 	creature = [];
 
 	constructor(
 		space,
+		svgBox
 	) {
-
 		this.space = space;
-		this.dimensions = space.dimensions;
+		this.svgBox = svgBox;
 		element = HTMLApp.buildElementMap(document, elementMap);
 	}// constructor
+
+
+	addCharacter() {
+		element.characterIcon.innerHTML += character.getBarrySVG;
+	}
+
+	updateCharacter() {
+		element.characterIcon.setAttribute(
+			'transform',
+			`translate(${wormfarmApp.character.svgX},${wormfarmApp.character.svgY}) rotate(${wormfarmApp.character.position.direction.degrees})`
+		);
+
+		svgdoc.updateSpaceTransform();
+		element.characterTitle.innerHTML = wormfarmApp.character.report;
+	}/* updateCharacter */
+
 
 
 	populate(number) {
@@ -48,7 +67,6 @@ export class WormFarm {
 	}
 
 
-
 	moveCreatures() {
 		//console.debug('wormfarm.moveCreatures', this.creature);
 		this.creature.forEach(
@@ -65,9 +83,10 @@ export class WormFarm {
 
 
 
-
+/* Worm
+*/
 export class Worm {
-	wormFarm;
+	/** @type {WormFarm} */ wormFarm;
 	id;
 	length;
 	radius;
@@ -79,6 +98,10 @@ export class Worm {
 	x;
 	y;
 
+
+	/**
+	 * @param {WormFarm} wormfarm
+	 */
 	constructor(
 		wormfarm,
 		id,
@@ -98,8 +121,8 @@ export class Worm {
 		this.direction = wormfarmApp.space.newAngle();
 		this.direction.degrees = Maths.getRandomInt(0,circleDivisions) * this.degreeUnit;
 
-		this.x = Maths.getRandomInt(wormfarm.dimensions.xMin, wormfarm.dimensions.xMax);
-		this.y = Maths.getRandomInt(wormfarm.dimensions.yMin, wormfarm.dimensions.yMax);
+		this.x = Maths.getRandomInt(wormfarm.space.shape.xMin, wormfarm.space.shape.xMax);
+		this.y = Maths.getRandomInt(wormfarm.space.shape.yMin, wormfarm.space.shape.yMax);
 
 
 		this.wormBody = document.createElementNS('http://www.w3.org/2000/svg','g');
@@ -110,7 +133,7 @@ export class Worm {
 
 		const c = document.createElementNS('http://www.w3.org/2000/svg','circle');
 		c.setAttribute('cx', this.x.toString());
-		c.setAttribute('cy', this.y.toString());
+		c.setAttribute('cy', (-this.y).toString());
 		this.wormBody.appendChild(c);
 
 		//console.log(this);
@@ -148,7 +171,7 @@ export class Worm {
 		//const c = document.createElement('circle');
 		const c = document.createElementNS('http://www.w3.org/2000/svg','circle');
 		c.setAttribute('cx', this.x.toString());
-		c.setAttribute('cy', this.y.toString());
+		c.setAttribute('cy', (-this.y).toString());
 		this.wormBody.appendChild(c);
 
 		if (this.wormBody.childElementCount > this.length)
@@ -160,14 +183,14 @@ export class Worm {
 
 
 	wrapX(x) {
-		if (x < wormfarmApp.space.dimensions.xMin ) x += wormfarmApp.space.dimensions.width;
-		if (x > wormfarmApp.space.dimensions.xMax ) x -= wormfarmApp.space.dimensions.width;
+		if (x < wormfarmApp.wormfarmBox.xMin ) x += wormfarmApp.wormfarmBox.width;
+		if (x > wormfarmApp.wormfarmBox.xMax ) x -= wormfarmApp.wormfarmBox.width;
 		return x;
 	}
 
 	wrapY(y) {
-		if (y < wormfarmApp.space.dimensions.yMin ) y += wormfarmApp.space.dimensions.height;
-		if (y > wormfarmApp.space.dimensions.yMax ) y -= wormfarmApp.space.dimensions.height;
+		if (y < wormfarmApp.wormfarmBox.yMin ) y += wormfarmApp.wormfarmBox.height;
+		if (y > wormfarmApp.wormfarmBox.yMax ) y -= wormfarmApp.wormfarmBox.height;
 		return y;
 	}
 

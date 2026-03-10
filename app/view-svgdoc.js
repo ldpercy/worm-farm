@@ -4,7 +4,7 @@
 
 import { HTMLApp } from "./[html-common]/module/HTMLApp.js";
 import * as Maths from "./[html-common]/module/Maths.js";
-import * as SVG from "./library/SVG.js";
+import * as SVG from "./[html-common]/module/SVG.js";
 import { wormfarmApp } from "./wormfarmApp.js";
 import { ui } from './view-html-ui.js';
 
@@ -14,10 +14,6 @@ const elementMap = {
 	space			: 'group-space',
 	cartesianGroup  : 'group-cartesian',
 	cartesianGrid	: 'group-cartesianGrid',
-
-	drawing			: 'group-drawing',
-	characterIcon	: 'character-icon',
-	characterTitle	: 'character-title',
 };
 
 
@@ -27,7 +23,7 @@ const precision = {
 
 
 
-class SVGView {
+class SVGDoc {
 
 
 	constructor() {
@@ -39,17 +35,18 @@ class SVGView {
 
 
 	drawGrid() {
-		const cartesianGrid = new SVG.CartesianGrid(wormfarmApp.space, wormfarmApp.dimensions);
+		const cartesianGrid = new SVG.CartesianGrid(wormfarmApp.space, wormfarmApp.svgViewBox);
 		document.getElementById('group-cartesianGrid').innerHTML = cartesianGrid.toString();
 	}
 
 
-
+	/*
 	drawPointInfo(svgX, svgY) {
 		const pointInfoSvg = this.pointInfo(svgX, -svgY);
 		document.getElementById('group-cartesianPoint').innerHTML = pointInfoSvg.cartesian;
 		document.getElementById('group-polarPoint').innerHTML = pointInfoSvg.polar;
 	}
+	*/
 
 
 	clearPoint() {
@@ -61,7 +58,7 @@ class SVGView {
 
 
 	/* pointInfo
-	*/
+	* /
 	pointInfo(x, y) {
 		const result = {
 			cartesian: '',
@@ -125,26 +122,18 @@ class SVGView {
 		`;
 
 		return result;
-	}/* pointInfo */
+	}/ * pointInfo */
 
 
 
-	updateCharacter() {
-		element.characterIcon.setAttribute(
-			'transform',
-			`translate(${wormfarmApp.character.svgX},${wormfarmApp.character.svgY}) rotate(${wormfarmApp.character.position.degrees})`
-		);
 
-		this.updateSpaceTransform();
-		element.characterTitle.innerHTML = wormfarmApp.character.report;
-	}/* updateCharacter */
 
 
 
 	updateSpaceTransform() {
 
 
-		const rotate = wormfarmApp.character.position.degrees;
+		const rotate = wormfarmApp.character.position.direction.degrees;
 
 		const rotateTransform    = (ui.rotateSpace)   ? `rotate(${-rotate},0,0)` : 'rotate(0,0,0)';
 		const translateTransform = (ui.centerCharacter) ? `translate(${-wormfarmApp.character.svgX},${-wormfarmApp.character.svgY})` : 'translate(0,0)';
@@ -172,15 +161,7 @@ class SVGView {
 		}
 
 
-		if (ui.colourScheme === 'light')
-		{
-			document.body.classList.remove('dark');
-			document.body.classList.add('light');
-		}
-		else {
-			document.body.classList.remove('light');
-			document.body.classList.add('dark');
-		}
+		wormfarmApp.setColourScheme(ui.colourScheme);
 
 		element.cartesianGrid.style.setProperty('opacity', ui.cartesianOpacity);
 
@@ -191,7 +172,7 @@ class SVGView {
 
 
 
-}/* SVGView */
+}/* SVGDoc */
 
 
-export const svg = new SVGView();
+export const svgdoc = new SVGDoc();

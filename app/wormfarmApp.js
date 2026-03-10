@@ -5,21 +5,21 @@
 import { HTMLApp } from "./[html-common]/module/HTMLApp.js";
 import { Character } from "./Character.js";
 
-import { SVG } from "./library/SVG.js";
-import { PlanarSpace } from "./library/PlanarSpace.js";
+import * as svg from "./[html-common]/module/SVG.js";
+import * as space from "./[html-common]/module/PlanarSpace.js";
 
 import * as controller from './controller.js';
-import { svg } from './view-svg.js';
+import { svgdoc } from './view-svgdoc.js';
 import { ui } from './view-html-ui.js';
 import { WormFarm } from './view-wormFarm.js';
 
 
 class WormFarmApp extends HTMLApp {
 
-	appVersion = 'v0.1.0';
+	appVersion = 'v0.2.0';
 	appInfo = [`%c
 		Worm Farm ${this.appVersion} by ldpercy
-		https://github.com/ldpercy/worm-farm/pull/??
+		https://github.com/ldpercy/worm-farm/pull/2
 		`.replace(/\n\t\t/g,'\n'),
 		'color:light-dark(darksalmon, lightsalmon);'
 	];
@@ -77,9 +77,13 @@ class WormFarmApp extends HTMLApp {
 		{
 			query: '#button-clearPoint',
 			type: 'click',
-			listener: svg.clearPoint,
+			listener: svgdoc.clearPoint,
 		},
-
+		{
+			query: '#button-showAppInfo',
+			type: 'click',
+			listener: ui.toggleAppInfoDialog,
+		},
 	];
 
 
@@ -108,21 +112,28 @@ class WormFarmApp extends HTMLApp {
 
 	setup() {
 
-		this.dimensions = new SVG.Rectangle(-2400, -2400, 4800, 4800);
+		this.svgViewBox = new svg.ViewBox(-2400, -2400, 4800, 4800);
+		this.element.svg.setAttribute('viewBox', this.svgViewBox.toStringPadded(100));
 
-		this.viewBox = new SVG.ViewBox(this.dimensions);
+		this.wormfarmBox = new space.Box(-2400, -2400, 4800, 4800);
+		this.space = new space.Space(
+			{
+				shape : this.wormfarmBox,
+			},
+			'wormfarm-space'
+		);
+		//console.log(this.space);
 
-		this.element.svg.setAttribute('viewBox', this.viewBox.toStringPadded(100));
+		this.wormfarm = new WormFarm(this.space, this.svgViewBox);
 
-		this.space = new PlanarSpace('wormfarm-space', this.dimensions);
 		this.character = new Character('Barry', 'character-barry', this.space, 6);
-		this.wormfarm = new WormFarm(this.space);
+		this.wormfarm.addCharacter();
 		this.wormfarm.populate(3);
 
-		svg.updateSpace();
-		svg.updateCharacter();
+		svgdoc.updateSpace();
+		this.wormfarm.updateCharacter();
 
-		svg.drawGrid();
+		svgdoc.drawGrid();
 		ui.updateCharacterInfo();
 	}
 
