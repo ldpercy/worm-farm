@@ -2,11 +2,11 @@
 //	wormfarmApp.js
 //
 
-import { HTMLApp } from "./[html-common]/module/HTMLApp.js";
+import { HTMLApp } from "../[html-common]/module/HTMLApp.js";
 import { Character } from "./Character.js";
 
-import * as svg from "./[html-common]/module/SVG.js";
-import * as space from "./[html-common]/module/PlanarSpace.js";
+import * as svg from "../[html-common]/module/SVG.js";
+import * as space from "../[html-common]/module/PlanarSpace.js";
 
 import * as controller from './controller.js';
 import { svgdoc } from './view-svgdoc.js';

@@ -1,5 +1,5 @@
-import { HTMLApp } from "./[html-common]/module/HTMLApp.js";
-import * as Maths from "./[html-common]/module/Maths.js";
+import { HTMLApp } from "../[html-common]/module/HTMLApp.js";
+import * as Maths from "../[html-common]/module/Maths.js";
 import { wormfarmApp } from "./wormfarmApp.js";
 import * as character from "./view-character.js";
 import { svgdoc } from './view-svgdoc.js'

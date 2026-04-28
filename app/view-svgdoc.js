@@ -2,9 +2,9 @@
 //	svg
 //
 
-import { HTMLApp } from "./[html-common]/module/HTMLApp.js";
-import * as Maths from "./[html-common]/module/Maths.js";
-import * as SVG from "./[html-common]/module/SVG.js";
+import { HTMLApp } from "../[html-common]/module/HTMLApp.js";
+import * as Maths from "../[html-common]/module/Maths.js";
+import * as SVG from "../[html-common]/module/SVG.js";
 import { wormfarmApp } from "./wormfarmApp.js";
 import { ui } from './view-html-ui.js';
 
