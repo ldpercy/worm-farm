@@ -5,15 +5,21 @@ svg {
 	font-family: serif;
 }
 
+
+svg * {
+	/* having difficulty getting transitions into the shadow dom at the moment, this is here for <use> elements until I can improve */
+	transition: all ease-in var(--transition-duration);
+}
+
 .svg-element {
 	width: 100vw;
 	height: 100vh;
 }
 
 svg:focus-within {
-	outline: 1px dotted var(--accent);
+	outline: 1px dotted var(--accent-colour);
 	outline-offset: -1px;
-	/* filter: drop-shadow(0px 0px 2px var(--accent)); */
+	/* filter: drop-shadow(0px 0px 2px var(--accent-colour)); */
 	/* transition: 1s; */
 }
 
