@@ -4,7 +4,9 @@
 
 
 
-
+:root {
+	--project-colour: salmon;
+}
 
 html {
 	--page-background-light: #fcfcfc;
@@ -17,8 +19,6 @@ html {
 	--purple: #b0b;
 	--fadedred: #f07;	/* point info */
 
-	--accent-light: darksalmon;
-	--accent-dark: lightsalmon;
 	--transition-duration: 0.5s;
 
 	--character-body: #0a07;
@@ -26,6 +26,10 @@ html {
 
 	--worm-body: darksalmon;
 	--worm-outline: pink;
+
+
+	--accent-colour: oklch(from var(--project-colour) 0.7 c h );
+	accent-color: var(--accent-colour);
 
 	margin:0px;
 	padding:0px;
@@ -47,8 +51,8 @@ html {
 
 html[data-colourscheme="light"] {
 	color-scheme: light;
-	--accent-colour: var(--accent-light);
-	accent-color: var(--accent-colour);
+	--accent-colour: oklch(from var(--project-colour) 0.7 c h );
+
 	background-color: var(--page-background-light);
 	color: black;
 
@@ -57,17 +61,12 @@ html[data-colourscheme="light"] {
 		border-color: #bbbb;
 	}
 	.infoBox { background-color: #fffc; }
-
-	.tabbar a {
-		border-color: #8f8f9d;
-		background-color: #ffffff;
-	}
 }
 
 html[data-colourscheme="dark"] {
 	color-scheme: dark;
-	--accent: var(--accent-dark);
-	accent-color: var(--accent-colour);
+	--accent-colour: oklch(from var(--project-colour) 0.9 c h );
+
 	background-color: var(--page-background-dark);
 	color: white;
 
@@ -78,10 +77,6 @@ html[data-colourscheme="dark"] {
 	.infoBox {
 		background-color: #222c;
 		border-color: #9999;
-	}
-	.tabbar a {
-		border-color: #8f8f9d;
-		background-color: #2b2a33;
 	}
 }
 
