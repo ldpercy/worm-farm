@@ -1,3 +1,4 @@
+@import "./[html-common]/style/emoji.css";
 @import "./[html-common]/style/fullpage/dialog-appInfo.css";
 @import "./[html-common]/style/fullpage/ui-panel.css";
 @import "./[html-common]/style/fullpage/panel-group.css";
@@ -7,11 +8,10 @@
 
 :root {
 	--project-colour: salmon;
+	--transition-duration: 0.5s;
 }
 
 html {
-	--page-background-light: #fcfcfc;
-	--page-background-dark: #111111;
 
 	--silver: #bbbb;
 	--teal: #088;		/* cartesian grid */
@@ -20,17 +20,19 @@ html {
 	--purple: #b0b;
 	--fadedred: #f07;	/* point info */
 
-	--transition-duration: 0.5s;
-
 	--character-body: #0a07;
 	--character-outline: #0a0f;
-
 	--worm-body: darksalmon;
 	--worm-outline: pink;
 
 
+	--html-background: var(--scheme-colour);
+	--default-panel-colour: var(--scheme-colour);
 	--accent-colour: oklch(from var(--project-colour) 0.7 c h );
+
+	background-color: var(--html-background);
 	accent-color: var(--accent-colour);
+	color: var(--text-colour);
 
 	margin:0px;
 	padding:0px;
@@ -53,32 +55,16 @@ html {
 html[data-colourscheme="light"] {
 	color-scheme: light;
 	--accent-colour: oklch(from var(--project-colour) 0.7 c h );
+	--scheme-colour: hsl(from var(--project-colour) h s 95 );
+	--text-colour: black;
 
-	background-color: var(--page-background-light);
-	color: black;
-
-	form {
-		background-color:#eee9;
-		border-color: #bbbb;
-	}
-	.infoBox { background-color: #fffc; }
 }
 
 html[data-colourscheme="dark"] {
 	color-scheme: dark;
 	--accent-colour: oklch(from var(--project-colour) 0.9 c h );
-
-	background-color: var(--page-background-dark);
-	color: white;
-
-	form {
-		background-color:#7779;
-		border-color: #9999;
-	}
-	.infoBox {
-		background-color: #222c;
-		border-color: #9999;
-	}
+	--scheme-colour: hsl(from var(--project-colour) h s 05 );
+	--text-colour: white;
 }
 
 
