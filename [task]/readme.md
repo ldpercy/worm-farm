@@ -12,6 +12,7 @@ Bugs
 
 Done
 ----
+* Bring in common styles (html-common v0.3)
 * Sync to html-common v0.1
 * Initial code import from Turtle
 
